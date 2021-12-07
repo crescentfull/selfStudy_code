@@ -31,6 +31,8 @@ class FixedStack :
         """스택이 가득 차 있는지 판단"""
         return self.ptr >= self.capacity
     
+    #B
+    
     def push(self, value: Any) -> None:
         """스택에 value를 푸시(데이터 삽입)"""
         if self.is_full():                  #스택이 가득 차 있는 경우
@@ -47,3 +49,30 @@ class FixedStack :
     def clear(self) -> None:
         """스택을 비움(모든 데이터를 삭제)"""
         self.ptr = 0
+    
+    #C    
+    def find(self, value: Any) -> Any:
+        """스택에서 value를 찾아 첨자(없으면 -1)를 반환"""
+        for i in range(self.ptr - 1, -1, -1):  # 꼭대기 쪽부터 선형 검색
+            if self.stk[i] == value:
+                return i  # 검색 성공
+        return -1         # 검색 실패
+
+    def count(self, value: Any) -> bool:
+        """스택에 포함되어있는 value의 개수를 반환"""
+        c = 0
+        for i in range(self.ptr):  # 바닥 쪽부터 선형 검색
+            if self.stk[i] == value:
+                c += 1             # 들어 있음
+        return c
+
+    def __contains__(self, value: Any) -> bool:
+        """스택에 value가 있는가?"""
+        return self.count(value)
+
+    def dump(self) -> None:
+        """덤프(스택 안의 모든 데이터를 바닥부터 꼭대기 순으로 출력)"""
+        if self.is_empty():  # 스택이 비어 있음
+            print('스택이 비어 있습니다.')
+        else:
+            print(self.stk[:self.ptr])
