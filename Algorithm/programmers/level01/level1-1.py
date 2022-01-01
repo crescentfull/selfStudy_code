@@ -10,7 +10,14 @@ n은 1이상 8000000000 이하인 자연수입니다.
 n      = 118372
 return = 873211
 '''
-
+n = 12398764
 def solution(n):
     answer = 0
-    return answer
+    #input값을 리스트로 변환
+    res = list(str(n)) #list()함수 사용, imutable을 위해서 input값 문자열로 변경위해 str() 사용
+    res.sort(reverse = True) #리스트로 받고 정렬 함수 sort()에서 reverse로 역순으로 재정렬
+    answer = ''.join(res) # 역순으로 정렬된 문자열 배열을 하나의 문자열로 합치기위해 ''.join() 사용 
+    print(int(answer)) 
+    return int(answer) #답은 int형으로 나와야하기 때문에 return 값 int()로 치환
+
+solution(n)
