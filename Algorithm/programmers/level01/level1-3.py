@@ -11,6 +11,12 @@ num	| return
 3	| "Odd"
 4	| "Even"
 '''
+
+num = 3
+num2 = 4
 def solution(num):
     answer = ''
     return answer
+
+print(solution(num))
+print(solution(num2))
