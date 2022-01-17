@@ -13,9 +13,11 @@ phone_number    |	return
 "01033334444"   |	"*******4444"
 "027778888"     |	"*****8888"
 '''
-
+phone_number = "123456789"
 def solution(phone_number):
     answer = ''
     phone_number_len = len(phone_number) - 4
     answer = (phone_number_len * '*') + phone_number[-4:]
     return answer
+
+print(solution(phone_number))
