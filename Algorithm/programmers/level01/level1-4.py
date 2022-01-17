@@ -16,4 +16,6 @@ phone_number    |	return
 
 def solution(phone_number):
     answer = ''
+    phone_number_len = len(phone_number) - 4
+    answer = (phone_number_len * '*') + phone_number[-4:]
     return answer
