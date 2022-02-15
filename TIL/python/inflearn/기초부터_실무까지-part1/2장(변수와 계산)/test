@@ -1,0 +1,28 @@
+# import re
+# import string
+# sentence = "His comments came after Pyongyang announced it had a plan to fire four missiles near the US territory of Guam"
+# def solution(sentence):
+#     new_string = re.sub(r'[^a-zA-Z]', "", sentence.lower())
+#     print("new_string : ", new_string)
+#     ascii_lower = set(string.ascii_lowercase)
+#    # ascii_lower = set(new_string)
+#     print("a : ", ascii_lower)
+#     sentence_lower = ascii_lower.intersection(new_string)
+#     print("b : ", sentence_lower)
+
+#     print("c : ", ascii_lower.difference(new_string))
+#     res = ascii_lower.difference(new_string)
+#     print("res : ", res)
+#     a = ''.join(res)
+#     print(a)
+#     if a == '':
+#         return "perfect"
+#     else:
+#         return ''.join(sorted(a))
+
+# print(solution(sentence))
+
+nums1 = [1,2,3,4,5,6,0,0,0,0]
+res = list(filter(lambda x: x!=0, nums1))
+#nums1 = [i for i in nums1 if i not in {0}]
+print(res)
