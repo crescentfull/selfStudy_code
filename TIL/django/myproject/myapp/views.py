@@ -89,9 +89,11 @@ def delete(request):
     if request.method == 'POST':
         id = request.POST['id']
         newTopics = []
+        
         for topic in topics:
             if topic['id'] != int(id):
                 newTopics.append(topic)
+                
         topics = newTopics
         print('id',id)
         return redirect('/')
