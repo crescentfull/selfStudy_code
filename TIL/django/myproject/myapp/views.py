@@ -24,6 +24,7 @@ def HTMLTemplate(articleTag, id=None):
                     <input type="submit" value="delete">
                 </form>
             </li>
+            <li><a href="/update/{id}">update</a></li>
         '''
         
     ol = ''
@@ -97,3 +98,10 @@ def delete(request):
         topics = newTopics
         print('id',id)
         return redirect('/')
+
+def update(request, id):
+    if request.method == 'GET':
+        article = 'Update'
+        return HttpResponse(HTMLTemplate(article, id))
+    elif request.method == 'POST':
+        return redirect(f'/read/{id}')
