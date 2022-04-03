@@ -25,3 +25,4 @@ while True:
 # 터틀 그래픽 창이 클릭이 되어야 화면에서 사라지게 하는 코드
 turtle.exitonclick()
 
+
