@@ -4,7 +4,7 @@ from datetime import *
 
 bornIn = int(input("태어난 년도를 입력하시오 : "))
 
-age = datetime.today().year - bornIn
+age = (datetime.today().year - bornIn)+1 #만나이로 결과 나오니까 +1
 print(age)
 
 if (13>= age >=8):
