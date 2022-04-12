@@ -20,18 +20,17 @@ elif score >= 80:
         grade = "B+"
     else:
         grade = "B0"
-elif score >= 80:
-    if score >= 95:
+elif score >= 70:
+    if score >= 75:
         grade = "C+"
     else:
         grade = "C0"
-elif score >= 80:
-    if score >= 95:
+elif score >= 60:
+    if score >= 65:
         grade = "D+"
     else:
         grade = "D0"
 else:
     grade = "F"
 
-print("grade : ",grade)
-    
+print(f"score : {score} , grade : {grade}")
