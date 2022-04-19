@@ -16,7 +16,8 @@ while score >= 0:
         
 #합계와 평균을 계산하고 출력하는 코드
 if cnt > 0:
-    aver = sum/cnt
+    avr = sum/cnt
 
 # 합계와 평균을 출력하는 코드
-print(str(cnt) + "학생의 평균은 %0.1f입니다" % avr)
+print(str(cnt) + "학생의 합계는 %d입니다" % sum)
+print(str(cnt) + "학생의 평균은 %.1f입니다" % avr)
