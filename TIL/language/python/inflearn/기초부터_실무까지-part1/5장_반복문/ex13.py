@@ -19,4 +19,4 @@ if cnt > 0:
     aver = sum/cnt
 
 # 합계와 평균을 출력하는 코드
-print(str(cnt+1)+"학생의 평균은 %0.1f입니다" %avr)
+print(str(cnt) + "학생의 평균은 %0.1f입니다" % avr)
