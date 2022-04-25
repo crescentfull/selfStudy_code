@@ -7,6 +7,7 @@ price = ""
 while True:
     price = input("상품 금액을 입력하세요.('끝' 입력하면 종료) : ")
     if eq(price, "끝"):   # if price == "끝"이랑 동일. operator import해줘야한다.
+                         #import opderator 하고 if opderator.eq()도 가능하다.
         print("상품의 총 가격 : "+str(total)+"원")
         break
     total += int(price)
