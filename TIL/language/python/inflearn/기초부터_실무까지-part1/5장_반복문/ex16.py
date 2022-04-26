@@ -41,4 +41,4 @@ while run:
     else:
         print("잘못입력하였습니다.")
 print("최종 속도 : ", speed)
-print("프로그램 종료")
+print("프로그램 종료!")
