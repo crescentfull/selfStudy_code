@@ -52,3 +52,21 @@ def log_func():
     print('logging')
 
 log_func()
+
+# 파라미터가 있는 함수에 데코레이터 적용하기
+# 데코레이터
+def outer_func(function):
+    def inner_func(digit1, digit2):
+        if digit2 == 0:                       # <--- 유효성 검사의 예
+            print('cannot be divided with zero')
+            return
+        function(digit1, digit2)
+    return inner_func
+
+# 데코레이터 사용하기 (유효성 검사)
+@outer_func
+def divide(digit1, digit2):
+    print (digit1 / digit2)
+    
+divide(4, 2)
+divide(9, 0)
