@@ -28,6 +28,7 @@ def logger_login_tina():
 logger_login_tina()
 
 #######################################
+# Nested function, Closure function 과 함께 데코레이터를 풀어서 작성
 # decorator 함수 정의
 def outer_func(function):
     def inner_func():
@@ -53,6 +54,7 @@ def log_func():
 
 log_func()
 
+##################################
 # 파라미터가 있는 함수에 데코레이터 적용하기
 # 데코레이터
 def outer_func(function):
@@ -70,3 +72,14 @@ def divide(digit1, digit2):
     
 divide(4, 2)
 divide(9, 0)
+
+##################################
+# 파라미터와 관계없이 모든 함수에 적용 가능한 Decorator 만들기
+# - 파라미터는 어떤형태이든 결국((args, **kwargs)로 표현 가능
+# - 데코레이터의 내부함수 파라미터를 (args, **kwargs)로 작성하면 어떤 함수이든 데코레이터를 적용 가능하다
+# 데코레이터 작성
+def general_decorator(function):
+    def wrapper(*args, **kwargs):
+        print("function is decorated")
+        return function(*args, **kwargs)
+    return wrapper
