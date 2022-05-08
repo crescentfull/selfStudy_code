@@ -20,3 +20,27 @@ def divide(digit1, digit2):
     return digit1 * digit2
 
 divide(0.1, 1)
+
+
+'''
+HTML 웹페이지 태그를 붙여주는 데코레이터 만들기
+해당 데코레이터를 사용해서 안녕하세요 출력
+
+예) @mark_bold - 볼드체로 만들기 태그: <b>내용</b>
+    @mark_italic - 이텔릭체로 만들기 태그: <i>내용</i>
+'''
+def mark_bold(function):
+    def wrapper(*args, **kwargs):
+        return '<b>'+function(*args, **kwargs)+'</b>'
+    return wrapper
+def mark_italic(function):
+    def wrapper(*args, **kwargs):
+        return '<i>'+function(*args, **kwargs)+'</i>'
+    return wrapper
+
+@mark_bold
+@mark_italic
+def test(string):
+    return string
+
+print(test("hi"))

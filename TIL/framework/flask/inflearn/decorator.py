@@ -77,9 +77,52 @@ divide(9, 0)
 # 파라미터와 관계없이 모든 함수에 적용 가능한 Decorator 만들기
 # - 파라미터는 어떤형태이든 결국((args, **kwargs)로 표현 가능
 # - 데코레이터의 내부함수 파라미터를 (args, **kwargs)로 작성하면 어떤 함수이든 데코레이터를 적용 가능하다
-# 데코레이터 작성
+# 데코레이터 작성 
 def general_decorator(function):
     def wrapper(*args, **kwargs):
         print("function is decorated")
         return function(*args, **kwargs)
     return wrapper
+
+# 데코레이터 적용하기
+@general_decorator
+def calc_square(digit):
+    return digit * digit
+
+@general_decorator
+def calc_plus(digit1, digit2):
+    return digit1 + digit2
+
+@general_decorator
+def calc_quad(digit1, digit2, digit3, digit4):
+    return digit1 * digit2 * digit3 * digit4
+
+# 함수 호출하기
+print (calc_square(2))
+print (calc_plus(2, 3))
+print (calc_quad(2, 3, 4, 5))
+
+##################################
+# 한 함수에 데코레이터 여러 개 지정하기
+# 함수에 여러 개의 데코레이터 지정 가능 (여러 줄로 @데코레이터를 써주면 됨)
+# 데코레이터를 나열한 순서대로 실행됨
+# 여러 데코레이터 작성하기
+def decorator1(function):
+    def wrapper():
+        print('decorator1')
+        function()
+    return wrapper
+ 
+def decorator2(function):
+    def wrapper():
+        print('decorator2')
+        function()
+    return wrapper
+
+# 여러 데코레이터를 함수에 한번에 적용하기
+@decorator1
+@decorator2
+def hello():
+    print('hello')
+
+hello()
