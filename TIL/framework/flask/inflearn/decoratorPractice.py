@@ -29,6 +29,8 @@ HTML 웹페이지 태그를 붙여주는 데코레이터 만들기
 예) @mark_bold - 볼드체로 만들기 태그: <b>내용</b>
     @mark_italic - 이텔릭체로 만들기 태그: <i>내용</i>
 '''
+print ("*******************************")
+
 def mark_bold(function):
     def wrapper(*args, **kwargs):
         return '<b>'+function(*args, **kwargs)+'</b>'
@@ -44,3 +46,36 @@ def test(string):
     return string
 
 print(test("hi"))
+
+'''
+HTML 웹페이지 태그와 같이 태그 이름을 넣으면 HTML 문법에 맞게 출력해주는 데코레이터를 만들기
+해당 데코레이터를 사용해서 b, i, h1, h2, h3, h4, h5, h6, center 태그를 리스트로 넣어서 안녕하세요 출력해보기
+'''
+'''python
+@mark_html('b')
+def print_title(title):
+    return title
+print ('잔재미코딩 Dave Lee 입니다.')
+출력:
+    <b>잔재미코딩 Dave Lee 입니다.</b> 
+'''
+print ("*******************************")
+
+def tag_decorator(tag):
+    def outer_wrapper(function):
+        def inner_wrapper(*args, **kwargs):
+            return (f"<{tag}>"+function(*args, **kwargs)+f"</{tag}>")
+        return inner_wrapper
+    return outer_wrapper
+
+@tag_decorator('b')
+def print_title(title):
+    return title
+
+print(print_title('hi'))
+
+@tag_decorator('h1')
+def print_title(title):
+    return title
+
+print(print_title('나는 누구인가 여긴 어디인가'))
