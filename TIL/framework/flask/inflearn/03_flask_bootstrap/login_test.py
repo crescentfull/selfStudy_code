@@ -1,29 +1,42 @@
-#프론트엔드와 백엔드 flask 로 한번에 구현해보기
+from flask import Flask, jsonify, request, render_template
+app = Flask(__name__, static_url_path='/static')
+session_count = 0
 
-import email
-from flask import Flask, jsonify, render_template, request
-app = Flask(__name__)
 
 @app.route('/login')
 def login():
-    username = request.args.get('user_name')
-    #파라미터 더 넣고 싶으면 더 넣으면 된다~
-    password = request.args.get('pw')
-    email    = request.args.get('email')
-    print(username, password, email)
-    print(type(username))
-    print(type(password))
-    print(type(email))
-    if username == 'dave':
-        return_data = {'auth' : 'success'}
+    email_address = request.args.get('email_address')
+    passwd = request.args.get('passwd')
+    print(email_address, passwd)
+
+    if email_address == 'dave@gmail.com' and passwd == '111':
+
+        return_data = {'auth': 'success'}
     else:
-        return_data = {'auth' : 'failed'}
+        return_data = {'auth': 'failed'}
     return jsonify(return_data)
+
 
 @app.route('/html_test')
 def hello_html():
-    #html file은 templates 폴더에 위치해 있어야 한다.
+    # html file은 templates 폴더에 위치해야 함
     return render_template('login_rawtest.html')
+
+
+def get_blog_page():
+    global session_count
+    session_count += 1
+    if session_count % 2 == 0:
+        return 'blog_A.html'
+    else:
+        return 'blog_B.html'
+
+
+@app.route('/blog')
+def blog_html():
+    blog_name = get_blog_page()
+    return render_template(blog_name)
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port="8080")
