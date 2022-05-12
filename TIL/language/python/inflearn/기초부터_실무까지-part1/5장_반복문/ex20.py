@@ -18,8 +18,10 @@ lastData = 0
 
 for num in range(2,2001):
     for start_num in range(2,num+1):
+        # 배수/소수 걸러주는 조건식
         if num % start_num == 0:
             break 
+    # 아래 조건이 참이다라는 것은 자기 자신으로 나눠서 나머지가 0이 나왔기 때문에 '소수'라는 것임으로 루프 실행 가능
     if num == start_num:
         print("소수  : ", start_num)
         sum += start_num
