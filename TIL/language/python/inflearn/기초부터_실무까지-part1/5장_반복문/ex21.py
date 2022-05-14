@@ -17,3 +17,8 @@ for letter in string:
     if letter not in vowels:
         result += letter
 print("출력 : ",result)
+
+#문자열 입력받아서 자음과 모음의 갯수를 출력하는 프로그램을 작성
+print("**********************************")
+origin = input("문자열을 입력하시오 : ")
+word = origin.lower() #입력받은 문자 소문자로 변경
