@@ -20,5 +20,16 @@ print("출력 : ",result)
 
 #문자열 입력받아서 자음과 모음의 갯수를 출력하는 프로그램을 작성
 print("**********************************")
-origin = input("문자열을 입력하시오 : ")
-word = origin.lower() #입력받은 문자 소문자로 변경
+origin  = input("문자열을 입력하시오 : ")
+word    = origin.lower() #입력받은 문자 소문자로 변경
+vowels  = 0
+consonants = 0
+#문자열의 길이가 0 초과하고, 알파벳이라면 참을 반환
+if len(origin)>0 and origin.isalpha():
+    for ch in word:
+        if ch in "aeiou": #모음처리
+            vowels += 1
+        else:             #자음처리
+            consonants += 1
+print("모음의 갯수 : ", vowels)
+print("자음의 갯수 : ", consonants)
