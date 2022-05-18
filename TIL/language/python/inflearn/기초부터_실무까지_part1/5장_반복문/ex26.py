@@ -17,4 +17,3 @@ print("*******************")
 #문자열 나누기
 print("*******************")
 statements = "나는 문자를 나누려 합니다"
-print(statements.split())
