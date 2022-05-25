@@ -15,3 +15,30 @@ def bigger(first,second):
     else:
         res = first
     return print("더 큰 값 : ", res)
+
+def square(num):
+    return print(f"{num} 제곱 값 : ",num*num)
+
+def get_max(x,y):
+    # return문은 최소하하는게 좋은코드다
+    temp = 0
+    if x>y:
+        temp = x
+    else:
+        temp = y
+    return print(f"{x}와 {y}에서 더 큰 값 :  ",temp)
+
+def get_min(x,y):
+    # return문은 최소하하는게 좋은코드다
+    temp = 0
+    if x>y:
+        temp = y
+    else:
+        temp = x
+    return print(f"{x}와 {y}에서 더 작은 값 :  ",temp)
+
+def power(x, y):
+    result = 1
+    for i in range(y):
+        result *= x
+    return print(f"{x}의 {y} 거듭제곱 : ",result)
