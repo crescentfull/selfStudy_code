@@ -10,4 +10,4 @@ def FtoC(temp_f):
 
 temp_f = float(input("온도를 입력해 주세요 : "))
 #함수 호출
-print("화씨 : ", temp_f,"섭씨 : ", round(FtoC(temp_f),2))t 
+print("화씨 : ", temp_f,"섭씨 : ", round(FtoC(temp_f),2))
