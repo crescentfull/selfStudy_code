@@ -8,7 +8,7 @@ def minus(x,y):
     return x-y    
 # 나누기
 def divide(x,y):
-    return x//y #(정수만)
+    return x/y #( // => 정수만 )
 # 곱하기
 def multiple(x,y):
     return x*y
