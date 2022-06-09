@@ -14,5 +14,5 @@ def decTobin(num):
 decTobin(12)
 
 print(bin(12)) #2진법
-oct(12) #8진법
-hex(12) #16진법
+print(oct(12)) #8진법
+print(hex(12)) #16진법
