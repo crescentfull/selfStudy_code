@@ -8,19 +8,14 @@
 # - 정적 메서드는 메서드 앞에 @staticmethod 라는 decorator를 넣어줘야한다
 # 클래스명.정적메서드명 또는 객체명.정적메서드명 둘다 호출이 가능하다
 
-from turtle import width
-
-
 class Figure:
     #생성자(initializer)
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        
     #메서드
     def clac_area(self):
         return self.width * self.height
-    
     #정적메서드(Figure에 너비와 높이가 같은 도형은 정사각형임을 알려주는 기능)
     @staticmethod
     def is_square(rect_width, rect_height):
@@ -28,3 +23,37 @@ class Figure:
             print("정사각형")
         else:
             print("no 정사각형")
+#호출
+figure1 = Figure(2,3)
+figure1.is_square(5,5)
+Figure.is_square(4,5)
+
+##
+print("****************************************")
+## classmethod 
+# - self파라미터 대신 cls파라미터
+# - 클래스 변수 접근가능하며 cls.클래스명으로 액세스가능 단!객체 속성/메서드는 불가!!
+# - 클래스 메서드는 메서드앞에 @classmethod를 넣어줘야한다
+# 클래스명.정적메서드명 또는 객체명.정적메서드명 둘다 호출이 가능하다
+class Figure1:
+    count = 0 #클래스변수
+    # 생성자(initializer)
+    def __init__(self, width, height):
+        #self.*: 인스턴스변수
+        self.width = width
+        self.height = height
+        #클래스변수 접근
+        Figure1.count += 1
+    #메서드
+    def calc_area(self):
+        return self.width * self.height
+    #클래스메서드
+    @classmethod 
+    def print_count(cls):
+        return cls.count
+#호출
+figure1 = Figure1(2,3)
+figure2 = Figure1(4,5)
+print(Figure1.count)
+print(Figure1.print_count()) #2
+print(Figure1.print_count()) #2
