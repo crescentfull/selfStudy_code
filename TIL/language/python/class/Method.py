@@ -8,6 +8,9 @@
 # - 정적 메서드는 메서드 앞에 @staticmethod 라는 decorator를 넣어줘야한다
 # 클래스명.정적메서드명 또는 객체명.정적메서드명 둘다 호출이 가능하다
 
+from turtle import circle
+
+
 class Figure:
     #생성자(initializer)
     def __init__(self, width, height):
@@ -57,3 +60,35 @@ figure2 = Figure1(4,5)
 print(Figure1.count)
 print(Figure1.print_count()) #2
 print(Figure1.print_count()) #2
+
+##
+print("****************************************")
+##
+# 차이점
+class Diff:
+    @classmethod
+    def set_name(cls, name):
+        cls.name = name
+        
+class Circle(Diff):
+    pass
+
+Diff.set_name("diff")
+print(Diff.name, Circle.name)
+Circle.set_name("circle")
+print(Diff.name, Circle.name)
+##
+print("****************************************")
+##
+class Diff2:
+    @staticmethod
+    def set_name(name): #self 필요 없다
+        Diff2.name = name #안에서 정의할려면 해당클래스명.변수명
+
+class Circle2(Diff2):
+    pass
+
+Diff2.set_name("diff2")
+print(Diff2.name, Circle2.name)
+Circle2.set_name("circle")
+print(Diff2.name, Circle2.name)
