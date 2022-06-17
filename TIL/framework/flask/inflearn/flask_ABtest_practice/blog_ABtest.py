@@ -1,15 +1,21 @@
-from sre_constants import SUCCESS
+
 from flask import Flask, jsonify, request, render_template, make_response
 from flask_login import LoginManager, login_manager, current_user, login_required, logout_user
 from flask_cors import CORS #CORS 정책 
-import os #보안 로그인할때 많이 사용하는 oauth2 ex;google,kakao 등 http 에서 테스트하기 위해서 사용
+
+from blog_view import blog 
+
+import os 
+#보안 로그인할때 많이 사용하는 oauth2 ex;google,kakao 등 http 에서 테스트하기 위해서 사용
 
 #https 만 지원하는 기능을 http에서 테스트할때 사용하는 변수
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 app = Flask(__name__, static_url_path='/static')
 CORS(app)
-app.secure.key = 'song_server' #보안 정책을 더 높일려면 서버를 킬때마다 갱신해주는 방법이 있다. 하지만 지금은 그렇게 해버리면 세션값들이 다 날아가기 때문에 고정값으로 하였다.
+app.secure_key = 'song_server' #보안 정책을 더 높일려면 서버를 킬때마다 갱신해주는 방법이 있다. 하지만 지금은 그렇게 해버리면 세션값들이 다 날아가기 때문에 고정값으로 하였다.
+
+app.register_blueprint(blog.blog_abtest, url_prefix = '/blog')
 
 login_manager = LoginManager()
 login_manager.init_app(app) #login_manager에 flask app 등록
