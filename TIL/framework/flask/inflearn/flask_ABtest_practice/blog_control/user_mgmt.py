@@ -39,3 +39,16 @@ class User(UserMixin):
         user = User(user_id=user[0], user_email=user[1], blog_id=user[2])
         #print(user)
         return user
+    
+    @staticmethod
+    def create(user_email, blog_id):
+        user = User.find(user_email)
+        if user == None:
+            mysql_db = conn_mysql()
+            db_cursor = mysql_db.cursor()
+            sql = f"INSERT INTO user_info(USER_EMAIL, BLOG_ID) VALUES('{str(user_email)}','{str(blog_id)}')"
+            db_cursor.execute(sql)
+            mysql_db.commit()
+            return User.find(user_email)
+        else:
+            return user
