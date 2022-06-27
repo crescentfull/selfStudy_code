@@ -1,5 +1,7 @@
 #문자열 실습
-
+#문자열에 대한 내용도 숫자형의 객체와 동일한 iㅡmutable object이다
+# 파이썬의 경우는 타 언어의 call by reference(value)의 개념과는 조금 다르다
+# 그 이유는 파이썬은 모든 것을 '객체'롤 판단하기 때문
 def change(string):
     string += '공부하자'
     print("change()내의 string 값 : ", string)
