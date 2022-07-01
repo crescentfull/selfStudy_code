@@ -1,5 +1,5 @@
 import pymysql
-import config
+from db_model import config
 
 MYSQL_HOST = config.DB_CONFIG['host']
 MYSQL_CONN = pymysql.connect(
