@@ -1,5 +1,5 @@
 import pymongo
-from db_model import config
+from static import config
 
 MONGO_HOST = config.DB_CONFIG['host']
 MONGO_CONN = pymongo.MongoClient('mongodb://%s' % (MONGO_HOST))

@@ -1,7 +1,7 @@
 
 from flask import Flask, jsonify, request, render_template, make_response
 from flask_login import LoginManager, login_manager, current_user, login_required, logout_user
-from flask_cors import CORS #CORS 정책 
+from flask_cors import CORS, cross_origin #CORS 정책 
 
 from blog_control.user_mgmt import User
 from blog_view import blog
