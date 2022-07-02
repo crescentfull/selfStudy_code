@@ -1,8 +1,9 @@
-from crypt import methods
-from sre_constants import SUCCESS
 from flask import Flask, Blueprint, request, render_template, make_response, jsonify, redirect, url_for
-from flask_login import login_user, current_user
+from flask_login import login_user, current_user, logout_user
+
 from blog_control.user_mgmt import User
+
+import datetime
 
 blog_abtest = Blueprint('blog', __name__)
 
@@ -18,13 +19,19 @@ def set_email():
         #print('set_email : ', request.get_jso n()) # content type이 application/json인 경우
         print('set_email : ', request.form['user_email'])
         user = User.create(request.form['user_email'],'A')
-        login_user(user)
+        login_user(user, remember=True, duration=datetime.timedelta(days=365))
         
         return redirect(url_for('blog.test'))
     # return redirect('/blog/test') # 2
     # 1,2번중 더 편하고 적합한 것으로 사용하면 된다.
     # return make_response(jsonify(SUCCESS=True), 200)
 
+@blog_abtest.route('/logout')
+def logout():
+    User.delete(current_user.id)
+    logout_user()
+    return redirect(url_for('blog.test'))
+    
 @blog_abtest.route('/test')
 def test():
     if current_user.is_authenticated:
