@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, request, render_template, make_response, jsonify, redirect, url_for
+from flask import Flask, Blueprint, request, render_template, make_response, jsonify, redirect, url_for, session
 from flask_login import login_user, current_user, logout_user
 
 from blog_control.user_mgmt import *
@@ -38,4 +38,5 @@ def blog_fullstack():
     if current_user.is_authenticated:
         return render_template('blog_A.html', user_email=current_user.user_email)
     else:
+        BlogSession.ave_session_info(session)
         return render_template(BlogSession.get_blog_page())
