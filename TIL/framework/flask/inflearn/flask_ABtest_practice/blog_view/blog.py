@@ -38,5 +38,6 @@ def blog_fullstack():
     if current_user.is_authenticated:
         return render_template('blog_A.html', user_email=current_user.user_email)
     else:
-        BlogSession.ave_session_info(session)
-        return render_template(BlogSession.get_blog_page())
+        webPageName = BlogSession.get_blog_page()
+        BlogSession.save_session_info(session['client_id'],'anonymous', webPageName)
+        return render_template(webPageName)
