@@ -36,7 +36,8 @@ def logout():
 @blog_abtest.route('/blog_fullstack')
 def blog_fullstack():
     if current_user.is_authenticated:
-        return render_template('blog_A.html', user_email=current_user.user_email)
+        webPageName = BlogSession.get_blog_page(current_user.blog_id)
+        return render_template(webPageName, user_email=current_user.user_email)
     else:
         webPageName = BlogSession.get_blog_page()
         BlogSession.save_session_info(session['client_id'],'anonymous', webPageName)
