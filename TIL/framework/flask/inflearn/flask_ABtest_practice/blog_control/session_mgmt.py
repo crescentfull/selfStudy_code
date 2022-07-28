@@ -19,8 +19,8 @@ class BlogSession():
         })
     
     @staticmethod
-    def get_blog_page(blog_id=None):
-        if blog_id == None:
+    def get_blog_page(blog_id=None): #blog_id(A타입인지 B타입인지) 없으면 none
+        if blog_id == None: #none일 경우 5:5비율로 A or B 출력
             if BlogSession.session_count == 0:
                 BlogSession.session_count = 1
                 return BlogSession.blog_page['A']

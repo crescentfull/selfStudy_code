@@ -31,12 +31,12 @@ def set_email():
 def logout():
     User.delete(current_user.id)
     logout_user()
-    return redirect(url_for('blog.test'))
+    return redirect(url_for('blog.blog_fullstack'))
     
 @blog_abtest.route('/blog_fullstack')
 def blog_fullstack():
     if current_user.is_authenticated:
-        webPageName = BlogSession.get_blog_page(current_user.blog_id)
+        webPageName = BlogSession.get_blog_page(current_user.blog_id) #get_blog_page()에 인자를 넣어줌으로써 현재 사용자의 blog_id를 받아옴 => A or B 고정
         return render_template(webPageName, user_email=current_user.user_email)
     else:
         webPageName = BlogSession.get_blog_page()
