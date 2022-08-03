@@ -64,11 +64,11 @@
             <a class="btn btn-light" href="/blog/logout" role="button">구독취소</a>
             {% else %}
             이메일을 남겨주시면, 블로그 연재시 메일로 송부드립니다 &nbsp;
-            <form action="/blog/set_email" method="get">
+            <form action="/blog/set_email" method="post">
               <div class="form-row">
                 <div class="col">
                   <input type="email" class="form-control" name="user_email">
-                  <input type="hidden" name="blog_id" value="A">
+                  <input type="hidden" name="blog_id" value="B">
                 </div>
                 <div class="col">
                   <button type="submit" class="btn btn-primary">구독</button>
