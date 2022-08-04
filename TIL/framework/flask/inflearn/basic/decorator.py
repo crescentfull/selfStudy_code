@@ -1,6 +1,5 @@
 # 데코레이터 작성하기
 import datetime
-import heapq
 
 def datetime_decorator(func):           # <--- datetime_decorator 는 데코레이터 이름, func 가 이 함수 안에 넣을 함수가 됨
     def wrapper():                      # <--- 호출할 함수를 감싸는 함수
