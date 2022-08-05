@@ -37,8 +37,14 @@ def logout():
 def blog_fullstack():
     if current_user.is_authenticated:
         webPageName = BlogSession.get_blog_page(current_user.blog_id) #get_blog_page()에 인자를 넣어줌으로써 현재 사용자의 blog_id를 받아옴 => A or B 고정
+        #얼마나 접속을 했는지 알 수 있다.
+        BlogSession.save_session_info(
+            session['client_id'], current_user.user_email, webPageName
+            )
         return render_template(webPageName, user_email=current_user.user_email)
     else:
         webPageName = BlogSession.get_blog_page()
-        BlogSession.save_session_info(session['client_id'],'anonymous', webPageName)
+        BlogSession.save_session_info(
+            session['client_id'],'anonymous', webPageName
+            )
         return render_template(webPageName)
