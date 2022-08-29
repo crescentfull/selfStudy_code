@@ -8,17 +8,22 @@
 def main():
     print("두 수의 합",get_sum(1,5))
     print("두 수의 합",get_sum(10,50))
+    # 람다 키워드를 이용햐여 sum() 함수 만들기
+    # 람다 함수는 코드 안에 함수를 포함하는 어느 곳이든 사용가능하다.
+    # 가장 많이 사용하는 곳은 gui 프로그램에서 이벤트를 처리하는 콜백 함수 형태이다.
+    sum = lambda x,y:x+y
     print("람다이용 두수의 합",sum(100,5))
     print("람다이용 두수의 합",sum(10,5))
     
+    #람다식으로 구성된 리스트 데이터
+    li = [ lambda x:x**2,lambda x:x**3,lambda x:x**4]
+    for i in li:
+        print(i(10))
+    #!! 람다 함수안에서 변수 값에다가 값을 지정해줄 수는 없다.
+    # lambda x=10,y:x+y  ERROR햣
+
 def get_sum(x,y):
     return x+y
 
-# 람다 키워드를 이용햐여 sum() 함수 만들기
-# 람다 함수는 코드 안에 함수를 포함하는 어느 곳이든 사용가능하다.
-# 가장 많이 사용하는 곳은 gui 프로그램에서 이벤트를 처리하는 콜백 함수 형태이다.
-sum = lambda x,y:x+y
 
-#!! 람다 함수안에서 변수 값에다가 값을 지정해줄 수는 없다.
-# lambda x=10,y:x+y  ERROR
 main( )
