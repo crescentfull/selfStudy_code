@@ -42,3 +42,7 @@ print(li2[0][1])
 
 print(li2[1][0])
 print(li2[1][1])
+
+for i in range(len(li2)):
+    for j in range(len(li2[i])):
+        print(li2[i][j])
