@@ -40,3 +40,18 @@ print(listTest2.index("배트맨"))
 # remove("요소")
 # del {리스트명}[{인덱스}]
 hero = ["아이언맨","슈퍼맨","배트맨","헐크","토르","베놈"]
+print("element : ", hero)
+hero.pop()
+print("element : ", hero)
+hero.pop(0)
+print("element : ", hero)
+# remove()메서드는 리스트의 요소 중 인덱스가 빠른순서로 제거한다.
+# 한번에 제거 하고 싶으면 반복문을 이용해서 제거
+hero = ["배트맨","아이언맨","슈퍼맨","배트맨","헐크","토르","베놈"]
+value = ["배트맨"]
+while value in hero:
+    hero.remove(value)
+print(hero)
+#? 뭐지 왜 삭제가 안돼
+hero.clear()
+print(hero)
