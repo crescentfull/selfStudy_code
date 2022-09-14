@@ -1,5 +1,6 @@
 # 인덱싱 : 리스트에서 하나의 요소를 인덱스를 통하여 참조하는 것
 from operator import index
+from xml.dom.minidom import Element
 
 
 li = ["안녕", "송영록", 10, 100, -11]
@@ -12,6 +13,8 @@ print(li[-2 + len(li)])
 print(li[:2])
 print(li[:-1])
 
+# 요소 추가
+# append insert
 listTest = ["TV","AUDIO","COMPUTER"]
 listTest.append("마우스")
 print("APPEND : ",listTest)
@@ -27,6 +30,13 @@ if "배트맨" in listTest2:
 if "조커" not in listTest2:
     print("ok!ok!")
     
+# 요소 위치찾기 index()
 print(listTest2.index("아이언맨"))
 print(listTest2.index("슈퍼맨"))
 print(listTest2.index("배트맨"))
+
+# 요소삭제
+# pop(인덱스)
+# remove("요소")
+# del {리스트명}[{인덱스}]
+hero = ["아이언맨","슈퍼맨","배트맨","헐크","토르","베놈"]
