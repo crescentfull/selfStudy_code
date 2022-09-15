@@ -6,3 +6,4 @@
 
 words = "Nice to meet you"
 print(words[0],words[1],words[2])
+
