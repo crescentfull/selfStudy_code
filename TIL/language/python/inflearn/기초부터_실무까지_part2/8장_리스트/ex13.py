@@ -26,8 +26,9 @@ def menu_print():
 
 menu_choice = 0 # 메뉴 번호를 저장
 friends = []    # 친구 목록을 리스트에 저장
+mobile = [] # 전화번호
 
-while True:
+while False:
     menu_print()
     menu_choice = int(input("메뉴 선택 : "))
     
@@ -56,3 +57,38 @@ while True:
             print(old_name,"이름 없음")
             
 # 친구추가시 연락처도 함께 업데이트 하는 프로그램
+while True:
+    menu_print()
+    menu_choice = int(input("메뉴 선택 : "))
+    
+    # 종료
+    if menu_choice == 0:
+        print("프로그램을 종료합니다")
+        break
+    elif menu_choice == 1:
+        print("친구 목록 : ", friends)
+        print("번호 목록 : ", mobile)
+    elif menu_choice == 2:
+        add = input("친구 이름을 입력 : ")
+        friends.append(add)
+        add_mobile = input("전화 번호 입력 : ")
+        mobile.append(add_mobile)
+    elif menu_choice == 3:
+        del_friend = input("삭제할 친구 이름 입력 : ")
+        index_mobile = friends.index(del_friend)
+    
+        if del_friend in friends:
+            friends.remove(del_friend)
+            mobile.remove(mobile[index_mobile])
+        else:
+            print("친구가 없어요")
+    elif menu_choice == 4:
+        old_name = input("변경을 원하는 이름 입력 : ")
+        if old_name in friends:
+            index = friends.index(old_name) # 변경할 이름의 인덱스를 가져온다
+            new_name = input("새로운 이름을 입력하세요 : ")
+            friends[index] = new_name
+            new_mobile = input("새로운 번호를 입력 : ")
+            mobile[index] = new_mobile
+        else:
+            print(old_name,"이름 없음")
