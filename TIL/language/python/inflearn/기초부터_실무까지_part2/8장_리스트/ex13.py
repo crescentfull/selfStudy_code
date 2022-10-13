@@ -45,4 +45,11 @@ while True:
             friends.remove(del_friend)
         else:
             print("친구가 없어요")
-    elif 
+    elif menu_choice == 4:
+        old_name = input("변경을 원하는 이름 입력 : ")
+        if old_name in friends:
+            index = friends.index(old_name) # 변경할 이름의 인덱스를 가져온다
+            new_name = input("새로운 이름을 입력하세요 : ")
+            friends[index] = new_name
+        else:
+            print(old_name,"이름 없음")
