@@ -17,6 +17,7 @@
 # 메뉴를 선택하시오 : 
 
 def menu_print():
+    print("*********************************")
     print("1. 친구리스트 출력")
     print("2. 친구추가")
     print("3. 친구삭제")
@@ -53,3 +54,5 @@ while True:
             friends[index] = new_name
         else:
             print(old_name,"이름 없음")
+            
+# 친구추가시 연락처도 함께 업데이트 하는 프로그램
