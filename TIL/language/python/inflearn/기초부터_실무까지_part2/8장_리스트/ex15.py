@@ -46,3 +46,10 @@ for i in num_list:
     if i >= num_key:
         res.append(i)
 print(res)
+
+# 순차알고리즘
+def linear_search(List,Key):
+    for i in range(List):
+        if Key == List[i]:
+            return 1 #탐색 성공 return
+    return 0 #탐색 실패 return
