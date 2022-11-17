@@ -17,3 +17,9 @@ print("--------------------------")
 print("값 변경 전(a,b) : ",a,b)
 (c, d) = (b, a)
 print("값 변경 전 (c,d) : ",c,d)
+
+# (x,y,z) = (10,20) # unpack value error
+person = ("신은혁", 14, "중학생")
+(name, age, student_grade) = person
+print(name, age, student_grade)
+ 
