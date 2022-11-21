@@ -11,3 +11,4 @@ partyA = {"신은혁","김연아","손연재","김철수"}
 partyB = {"최양락","김기훈","손연재","안철수"}
 
 print(partyA.isdisjoint(partyB))
+print(partyA.intersection(partyB))
