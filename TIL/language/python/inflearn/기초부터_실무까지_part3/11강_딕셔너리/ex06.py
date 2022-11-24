@@ -66,3 +66,27 @@ print("---------------------------------")
 # 전달받은 인자값으로 문자열을 나눈다. 리턴 타입은 튜플이다.
 string = "song972@konkuk.ac.kr"
 print(string.partition("@"))
+
+print("---------------------------------")
+# count()는 인자값으로 들어오는 값을 문자열에서 몇 개 있는지 카운팅을 해준다.
+# 찾는 인자값이 없다면 0을 리턴해준다.
+string = "aaaaaabcc"
+print(string.count("a"))
+
+print("---------------------------------")
+# find()메서드는 특정 단어를 찾아서 인덱스를 리턴하고 없다면 -1을 리턴한다.
+# index() 차이점
+string = "apple"
+print(string.find("z"))
+# print(string.index("z")) # index()는 특정 단어를 찾으면 리턴하지만 없다면 예외를 발생 시켜버린다.>>> valueError
+
+print("---------------------------------")
+# 문자열에서 공백을 제거하는 방법
+# strip() : 양쪽 공백 제거, 탭문자, 줄바꿈(enter)도 제거
+# lstrip() : 왼쪽 공백만 제거
+# rstrip() : 오른쪽 공백만 제거
+# 단 메소드로 문자열 중간에 존재하는 공백은 제거할 방법이 없다. (함수를 만들어서 직접 사용해야 한다.)
+string = '\t   aaaaaa bbbbbb cccc dddddd       \t'
+print(string.strip())
+print(string.rstrip())
+print(string.lstrip())
