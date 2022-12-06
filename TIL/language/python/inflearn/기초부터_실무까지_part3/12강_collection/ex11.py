@@ -31,7 +31,8 @@ print(p3)
 
 for n in [p1,p2,p3]:
     print("%s은(는) %d세의 %s성입니다. 사는도시 %s" %n)
-    
+
+# _replace()
 p1 = p1._replace(name='강백호')
 p2 = p2._replace(age=44)
 p3 = p3._replace(addr='서울')
@@ -39,3 +40,16 @@ print("-"*30)
 
 for n in [p1,p2,p3]:
     print("%s은(는) %d세의 %s성입니다. 사는도시 %s" %n)
+
+# _fields
+print(p1._fields) # 선언한 변수의 필드명을 tuple형태로 return
+
+# getattr() 은 필드명으로 해당 값을 출력할 때 사용한다
+print(getattr(p1, 'name'))
+
+# **(double-star-operator)은 namedtuple() 딕셔너리 형태의 자료구조 namedtuple() 변환하여 반환
+dic = {"name" : "신으비", "age" : 15, "gender":"여", "addr":"대전"}
+print(dic)
+p4 = person(**dic)
+print("%s은(는) %d세의 %s성입니다. 사는도시 %s" % (p4.name, p4.age, p4.gender, p4.addr))
+print(type(p4))
