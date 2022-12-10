@@ -14,16 +14,16 @@ class Rectangle:
         return self.side * self.side
     
     #
-    def printArea(rectangle, cnt):
-        print("변의 길이 \t면적")
-        while cnt >= 1:
-            print("\t",rectangle.side, "\t", rectangle.getArea())
-            rectangle.side += 1
-            cnt -= 1
+def printArea(rectangle, cnt):
+    print("변의 길이 \t면적")
+    while cnt >= 1:
+        print("\t",rectangle.side, "\t", rectangle.getArea())
+        rectangle.side += 1
+        cnt -= 1
 
 if __name__ == "__main__":
     rectangle = Rectangle()
     cnt = 5
-    rectangle.printArea(cnt)
+    printArea(rectangle, cnt)
     print("정사각형의 한 변의 길이 : ", rectangle.side)
     print("반복획수 : ", cnt)
