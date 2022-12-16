@@ -5,18 +5,21 @@
 # 조상클래스
 class Car:
     # 부모클래스의 멤버는 2개
-    speed = 0
-    def __init__(self, speed):
-        self.speed = speed
-    
+    def __init__(self):
+        self.speed = 0
+        self.door = 0
+        
     def upSpeed(self, speed):
         self.speed += speed
         print(f"현재속도(부모클래스) : {self.speed}")
+        print(f"문 갯수(부모클래스) : {self.door}")
         
 # 자식클래스
 class Sedan(Car):
-    def __init__(self, speed):
+    def __init__(self, speed, door):
+        Car.__init__(self)
         self.speed = speed
+        self.door = door
     
     def downSpeed(self, speed):
         self.speed -= speed
@@ -24,6 +27,9 @@ class Sedan(Car):
 
         
 if __name__ == "__main__":
-    sedan = Sedan(0)
-    sedan.upSpeed(100)
-    sedan.downSpeed(40)
+    car = Car()
+    car.upSpeed(29)  # Car클래스 메서드
+    
+    sedan = Sedan(0, 4)
+    sedan.upSpeed(100)  # 부모클래스 메서드
+    sedan.downSpeed(40) # 자식클래스 메서드
