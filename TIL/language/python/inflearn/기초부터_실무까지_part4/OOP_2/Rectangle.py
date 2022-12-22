@@ -20,11 +20,13 @@ class Rectangle(Shape):
         sx1, sy1 = 0, 0 # 좌측 상단의 좌표값
         sx2, sy2 = 0, 0 # 우측 하단의 좌표값
         
-        sx1 = self.cx - self.width//2
-        sy1 = self.cy - self.height//2
-        sx2 = self.cx - self.width//2
-        sy2 = self.cy - self.height//2
-        print(f"sx1,sy1 = {sx1},{sy1}, sx2,sy2 = {sx2},{sy2}")
+        sx1 = self.cx - self.width/2
+        sy1 = self.cy - self.height/2
+        sx2 = self.cx + self.width/2
+        sy2 = self.cy + self.height/2
+        print("cx : ", self.cx)
+        print("cy : ", self.cy)
+        print(f"sx1,sy1 = {sx1}, {sy1}, sx2,sy2 = {sx2}, {sy2}")
         self.setPen() # 팬의 색상과 두께를 부모클래스의 메서드 호출
         self.myTurtle.penup()   # 펜을드는 메서드
         self.myTurtle.goto(sx1,sy1) # 펜을 좌측 상단으로 이동
