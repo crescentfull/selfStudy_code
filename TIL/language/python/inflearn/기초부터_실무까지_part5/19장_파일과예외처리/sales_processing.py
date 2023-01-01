@@ -10,7 +10,9 @@ infilename = input('입력 파일 이름 : ')
 outfilename = input('출력 파일 이름 : ')
 
 # 입출력을 하기 위해서 파일을 연다
-infile = open(infilename, 'r')
+# 중요한 것은 encoding 부분을 동일하게 가져가야만 글자가 깨지는 것을 방지할 수가 있기 때문에
+# 반드시 파일간에 읽고 쓸때는 동일하게 하도록 하는 습관을 들이도록 하자
+infile = open(infilename, 'r', encoding='UTF-8')
 outfile = open(outfilename, 'w', encoding='UTF-8')
 
 # 합계와 횟수를 위한 변수를 정의한다.
