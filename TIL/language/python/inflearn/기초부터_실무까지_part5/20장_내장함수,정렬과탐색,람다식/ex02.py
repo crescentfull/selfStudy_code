@@ -29,4 +29,16 @@ students = [
     ("김김김", 4.1, 20210702),
     ("이쓰리", 3.4, 20210703)
 ]
+print("-"*40)
+# studendts 튜플리스트 학번 기준 오름차순 정렬이 이루어짐
 print(sorted(students, key=lambda students: students[2]))
+print("-"*40)
+
+# 오름차순 정렬과 내림차순 정렬
+# sort(), sorted() 함수에는 reverse 매개변수가 존재한다. reverse 매개변수를 이용하여 내림차순, 오름차순 결정
+print(sorted(students, key=lambda students: students[2], reverse=True))
+
+# 정렬의 안정성
+# 안정성이란 동일한 키값을 가지고 있는 행(레코드)이 여러 개 존재하더라도 행의 순서가 그대로 유지가 되는 성질을 안정성이라고 한다.
+data = [(1,100),(1,200),(2,100),(2,200)]
+print(sorted(data, key=lambda data:data[1]))
