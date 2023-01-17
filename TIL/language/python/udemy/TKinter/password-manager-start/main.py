@@ -1,7 +1,36 @@
 from tkinter import *
 from tkinter import messagebox
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
+#Password Generator Project
+import random
 
+def randomPwd():
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+
+    nr_letters = random.randint(8, 10)
+    nr_symbols = random.randint(2, 4)
+    nr_numbers = random.randint(2, 4)
+
+    password_list = []
+
+    for char in range(nr_letters):
+        password_list.append(random.choice(letters))
+
+    for char in range(nr_symbols):
+        password_list += random.choice(symbols)
+
+    for char in range(nr_numbers):
+        password_list += random.choice(numbers)
+
+    random.shuffle(password_list)
+
+    password = ""
+    for char in password_list:
+        password += char
+
+    print(f"Your password is: {password}")
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 def save():
@@ -10,7 +39,7 @@ def save():
     password = password_entry.get()
     
     if len(website) == 0 or len(password) == 0:
-        messagebox.showinfo(title="ERRORERROR", message="id 혹은 password에 빈공간이 있습니다.")
+        messagebox.showinfo(title='error', message="id 혹은 password에 빈공간이 있습니다.")
     else:
         is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: \nEmail: {email} "
                                                     f"\nPassword: {password} \nIs it OK to save?(y/n)")
@@ -50,7 +79,7 @@ password_entry = Entry(width=21)
 password_entry.grid(row=3, column=1)
 
 # Button
-generate_password_button = Button(text="Generate Password", width=10)
+generate_password_button = Button(text="Generate Password", width=10, command=randomPwd)
 generate_password_button.grid(row=3, column=2)
 add_button = Button(text="add", width=33, command=save)
 add_button.grid(row=4, column=1, columnspan=2)
