@@ -7,7 +7,7 @@ import pyperclip, json
 
 #Password Generator Project
 def generate_password():
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    letters  = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
@@ -38,15 +38,19 @@ def save():
     if len(website) == 0 or len(password) == 0:
         messagebox.showinfo(title="Oops", message="Please make sure you haven't left any fields empty.")
     else:
-        with open("data.json", "r") as data_file:
-            #Reading old data
-            data = json.load(data_file)
-            #Updating old data with new data
-            data.update(new_data)
-            print(data)
+        try:
+            with open("data.json", "r") as data_file: # 파일없으면 filenotfound error가 발생한다.
+                #Reading old data
+                data = json.load(data_file)
+                #Updating old data with new data
+                data.update(new_data)
+                print(data)
+        except FileNotFoundError:
+            with open("data.json","w")
         with open("data.json", "w") as data_file:
             #Saving updated data
             json.dump(new_data, data_file, indent=4) #indent 들여쓰기 , json 파일을 사람이 보기에 좋게 만들어주기 위해서.
+            
             website_entry.delete(0, END)
             password_entry.delete(0, END)
 
