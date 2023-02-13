@@ -42,15 +42,17 @@ def save():
             with open("data.json", "r") as data_file: # 파일없으면 filenotfound error가 발생한다.
                 #Reading old data
                 data = json.load(data_file)
-                #Updating old data with new data
-                data.update(new_data)
-                print(data)
         except FileNotFoundError:
-            with open("data.json","w")
-        with open("data.json", "w") as data_file:
-            #Saving updated data
-            json.dump(new_data, data_file, indent=4) #indent 들여쓰기 , json 파일을 사람이 보기에 좋게 만들어주기 위해서.
-            
+            with open("data.json","w") as data_file:
+                json.dump(new_data, data_file, indent=4)
+        else:
+            #Updating old data with new data
+            data.update(new_data)
+            print(data)        
+            with open("data.json", "w") as data_file:
+                #Saving updated data
+                json.dump(data, data_file, indent=4) #indent 들여쓰기 , json 파일을 사람이 보기에 좋게 만들어주기 위해서.
+        finally:  
             website_entry.delete(0, END)
             password_entry.delete(0, END)
 
