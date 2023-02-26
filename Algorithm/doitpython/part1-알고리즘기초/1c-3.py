@@ -5,3 +5,9 @@ while True:
     if no >= 10 and no <= 99:
         break
 print(f'입력받은 양수는 {no}이다')
+
+# 드모르간의 법칙:
+# De Morgan's laws
+# '각 조건을 부정하고 논리곱을 논리합으로, 논리합을 논리곱으로 바꾸고 다시 전체를 부정하면 원래의 조건과 같다'
+# 1. x and y 와 not(not x or not y)의 논릿값은 같습니다.
+# 2. x or y 와 not(not x and not y)의 논릿값은 같습니다.
