@@ -24,9 +24,18 @@ def generate_password():
 
 def find_password():
     website = website_entry.get()
-    with open("data.json") as data_file:
-        data = json.load(data_file)
-
+    try:
+        with open("data.json") as data_file:
+            data = json.load(data_file)        
+    except FileNotFoundError: # 파일 로드 실패시!
+        messagebox.showinfo("Error","FILE NOT FOUND")
+    else:
+        if website in data:
+            email = data[website]["email"]
+            password = data[website]["password"]
+            messagebox.showinfo(title="website", message=f"Email : {email}\n Password : {password}")
+        else:
+            messagebox.showinfo("ERROR",f"No details for {website} exists")
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save():
 
