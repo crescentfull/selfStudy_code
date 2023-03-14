@@ -18,9 +18,11 @@ import threading
 import time
 
 # 스레드 실행 함수
-def thread_func(name):
+def thread_func(name, d):
     logging.info("Sub-Thread %s: starting", name)
-    time.sleep(3) # 3sec
+    #time.sleep(3) # 3sec
+    for i in d:
+        print(i)
     logging.info("Sub-Thread %s: finished", name)
 
 # 메인 영역
@@ -31,14 +33,26 @@ if __name__ == "__main__":
     logging.info("Main-Thread: before creating thread")
     
     # 함수 인자 확인
-    x = threading.Thread(target=thread_func, args=('First',))
+    x = threading.Thread(target=thread_func, args=('First', range(5)), daemon=True)
+    y = threading.Thread(target=thread_func, args=('Second', range(20)))
+    z = threading.Thread(target=thread_func, args=('Third', range(10)), daemon=True)
+
     logging.info("Main-Thread: before running thread")
     
     # 서브 스레드 시작
     x.start()
+    y.start()
+    z.start()
+    
+    # DaemonThread check
+    print(x.isDaemon())
+    print(y.isDaemon())
+    print(z.isDaemon())
     
     # 주석 전후 결과 확인
-    # x.join()
+    # x.join() # daemon을 쓰는데 join을 쓴다? 굉장히 효율적이지 못한 코드이다
+    # y.join()
+    # z.join()
     # 자식 스레드가 종료될때까지 메인스레드 대기
     
     logging.info("Main-Thread: wait for the thread to finish")
