@@ -28,6 +28,18 @@ class FakeDataStore:
     def __init__(self):
         self.value = 0
 
+    # 변수 업데이트 함수
+    def update(self, n):
+        logging.info(f'Thread {n}: starting update')
+        
+        # 뮤텍스 & lock 등 동기화(Thread synchronization)필요
+        local_copy = self.value
+        local_copy += 1
+        time.sleep(0.1)
+        self.value = local_copy
+        
+        logging.info(f'Thread {n}: finished update')
+
 if __name__ == "__main__":
     # logging format 설정
     format = "%(asctime)s: %(message)s"
