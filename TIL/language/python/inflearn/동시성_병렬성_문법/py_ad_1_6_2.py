@@ -22,22 +22,49 @@ Keyword - Lock, DeadLock, Race Condition, Thread synchronization
 import logging
 from concurrent.futures import ThreadPoolExecutor
 import time
+import threading
 
 class FakeDataStore:
     #공유 변수(value)
     def __init__(self):
         self.value = 0
+        #하나씩 들어가야하니까
+        self._lock = threading.Lock()
 
     # 변수 업데이트 함수
     def update(self, n):
         logging.info(f'Thread {n}: starting update')
         
         # 뮤텍스 & lock 등 동기화(Thread synchronization)필요
-        local_copy = self.value
-        local_copy += 1
-        time.sleep(0.1)
-        self.value = local_copy
         
+        # # lock 획득 방법 #1
+        # self._lock.acquire()
+        # logging.info(f'Thread {n} has lock')
+        
+        # local_copy = self.value ## 문제가 있으니까 동기화를 시켜줘야한다.
+        # local_copy += 1
+        # time.sleep(0.1)
+        # self.value = local_copy
+        
+        # logging.info(f'Thread {n} about to release lock')
+        
+        # # Lock 반환
+        # self._lock.release()
+        
+        # Lock 획득 방법 #2
+        '''
+        acquire() 와 release()를 알아서 해준다.
+        '''
+        with self._lock:
+            logging.info(f'Thread {n} has lock')
+        
+            local_copy = self.value 
+            local_copy += 1
+            time.sleep(0.1)
+            self.value = local_copy
+        
+            logging.info(f'Thread {n} about to release lock')
+            
         logging.info(f'Thread {n}: finished update')
 
 if __name__ == "__main__":
@@ -52,7 +79,7 @@ if __name__ == "__main__":
     
     # With context시작
     with ThreadPoolExecutor(max_workers=2) as executor:
-        for i in ['First', 'Second', 'Third']:
+        for i in ['First', 'Second', 'Third', 'Four']:
             executor.submit(store.update, i)
             
-    logging.info(f'Testing update. Ending value is {store.value}')
+    logging.info(f'Test update. Ending value is {store.value}')
