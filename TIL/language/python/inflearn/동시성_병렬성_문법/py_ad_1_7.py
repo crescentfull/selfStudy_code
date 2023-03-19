@@ -18,11 +18,27 @@ import logging
 import queue, random, threading, time
 
 # 생산자
-def producer():
-    pass
+def producer(queue, event):
+    '''
+    네트워크 대기 상태라 가정(서버)
+    '''
+    while not event.is_set():
+        msg = random.randint(1,11)
+        logging.info(f'Producer got message: {msg}')
+        queue.put(msg)
+    
+    logging.info('Producer received event EXIT')
 # 소비자
-def consumer():
-    pass
+def consumer(queue, event):
+    '''
+    응답 받고 소비하는 것으로 가정 or DB 저장
+    '''
+    while not event.is_set() or not queue.empty():
+        msg = queue.get()
+        logging.info(f'Consumer storing message: {msg} (size={queue.qsize()})')
+        
+    logging.info('Consumer received event Exiting')
+
 
 if __name__ == '__main__':
     # logging format 설정
@@ -38,11 +54,12 @@ if __name__ == '__main__':
     # with context 
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         executor.submit(producer, pipeline, event) #실행함수, 파라미터 1, 파라미터2
+        executor.submit(consumer, pipeline, event) #실행함수, 파라미터 1, 파라미터2
     
-    # 실행 시간 조정
-    time.sleep(0.1)
+        # 실행 시간 조정
+        time.sleep(2)
     
-    logging.info("Main : about to SET EVENT")
+        logging.info("Main : about to SET EVENT")
     
-    # 프로그램 종료
-    event.set()
+        # 프로그램 종료
+        event.set()
