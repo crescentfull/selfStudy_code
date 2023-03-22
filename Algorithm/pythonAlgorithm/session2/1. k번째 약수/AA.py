@@ -1,5 +1,5 @@
 import sys
-# sys.stdin=open("in2.txt", "rt")
+sys.stdin=open("in2.txt", "rt")
 n,k = map(int, input().split())
 print(n,k)
 cnt=0
