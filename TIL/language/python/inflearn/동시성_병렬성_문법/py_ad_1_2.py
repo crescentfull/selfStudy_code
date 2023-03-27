@@ -17,6 +17,5 @@ GIL(Global Interpreter Lock)
     (4) 프로세스 사용 가능(Numpy/Scipy)등 GIL 외부 영역에서 효율적인 코딩이 가능하도록 라이브러리 혹은 패키지가 존재
     (5) 병렬 처리는 Multiprocessing, asyncio 사용 가능, 선택지 다양
     (6) thread 동시성을 완벽하게 처리하기 위해 Jython(python문법을 java에서 실행시키는 문법), IronPython, Stackless Python 등이 존재
-    (7)  
 
 '''
