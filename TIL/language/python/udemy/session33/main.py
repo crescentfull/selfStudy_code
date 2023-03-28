@@ -62,3 +62,4 @@ while True:
                                 to_addrs="songyeongrok11@gmail.com",
                                 msg=f"Subject:the sun is overhead\n\nhead up bro! look at the sky")
             print("***SEND EMAIL!***")
+            break
