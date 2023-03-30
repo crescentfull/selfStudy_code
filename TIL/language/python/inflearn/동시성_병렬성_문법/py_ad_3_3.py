@@ -21,8 +21,14 @@ CPU Bound vs I/O Bound
 작업 목적에 따라서 적절한 동시성 라이브러리 선택이 중요
 
 최종 비교
-    - Multiprocessing : Multiple processes, 고가용성(CPU) Utilization -> CPU-Bound -> 10개 부엌, 10명 요리사, 10개 요리
-    - Threading : Single(Multi) process, Multiple threads, OS decides task switching -> Fast I/O Bound -> 1개 부엌, 10명 요리사, 10개 요리
-    - AsyncIO : Single process, single thread, cooperative multitasking, tasks cooperativley decide swithching -> Slow I/O Bound -> 1개 부엌, 1명 요리사, 1개 요리
+    - Multiprocessing : Multiple processes, 고가용성(CPU) Utilization 
+                        -> CPU-Bound 
+                        -> 10개 부엌, 10명 요리사, 10개 요리
+    - Threading : Single(Multi) process, Multiple threads, OS decides task switching 
+                        -> Fast I/O Bound 
+                        -> 1개 부엌, 10명 요리사, 10개 요리
+    - AsyncIO : Single process, single thread, cooperative multitasking, tasks cooperativley decide swithching 
+                        -> Slow I/O Bound 
+                        -> 1개 부엌, 1명 요리사, 1개 요리
 
 '''
