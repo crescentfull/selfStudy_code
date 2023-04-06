@@ -13,7 +13,8 @@ class QuizInterface:
         
         self.canvas = Canvas(width=300, height=250, bg="white")
         self.question_text = self.canvas.create_text(
-            150, 125, 
+            150, 125,
+            width=280, 
             text="Some Question Text", 
             fill=THEME_COLOR,
             font=("Arial", 20, "italic")
@@ -28,6 +29,16 @@ class QuizInterface:
         self.false_button = Button(image=false_image, highlightthickness=0)
         self.false_button.grid(row=2, column=1)
         
+        self.get_next_question()
+        
         self.window.mainloop()
 
+    def get_next_question(self):
+        '''
+        quiz_brain파일 안의 Quiz_brain class 이용, next_quetion()
+        '''
+        q_text = self.quiz.next_question()
+        self.canvas.itemconfig(self.question_text, text=q_text)
+        
+        
 QuizInterface()
