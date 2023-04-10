@@ -13,7 +13,8 @@ def request_site(url, session):
     print(session.headers)
     
     with session.get(url) as response:
-        print(f'[Read Contents : {len(response.content)}, Status Code: {response.status_code}] from {url}')
+        pass
+        # print(f'[Read Contents : {len(response.content)}, Status Code: {response.status_code}] from {url}')
 
 # 실행함수2(요청)
 def request_all_sites(urls):
