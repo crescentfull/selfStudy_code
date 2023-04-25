@@ -9,12 +9,11 @@ import requests, time
 # 실행함수1(다운로드)
 def request_site(url, session):
     #세션확인
-    print(session)
-    print(session.headers)
+    # print(session)
+    # print(session.headers)
     
-    with session.get(url) as response:
-        pass
-        # print(f'[Read Contents : {len(response.content)}, Status Code: {response.status_code}] from {url}')
+    with session.get(url, verify=False) as response:
+        print(f'[Read Contents : {len(response.content)}, Status Code: {response.status_code}] from {url}')
 
 # 실행함수2(요청)
 def request_all_sites(urls):
@@ -26,8 +25,8 @@ def main():
     # 테스트 URLS
     urls = [
         "https://www.jython.org",
-        "https://olympus.realpython.org/dice",
-        "https://realpython.com"
+        "https://www.naver.com",
+        "https://yahoo.com"
     ]*3
     
     # 실행시간 측정
