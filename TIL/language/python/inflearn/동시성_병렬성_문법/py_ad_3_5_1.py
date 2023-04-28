@@ -1,11 +1,12 @@
 '''
 Section 3
-Concurrency, CPU Bound vs I/O Bound(1) - Synchronous
-Keyword - I/O Bound, requests
+Concurrency, CPU Bound vs I/O Bound(2) - threading vs asyncio vs multiprocessing
+Keyword - I/O Bound, requests, threading
 '''
 import concurrent.futures, threading
 import requests, time
 
+# I/O 바운드, 스레딩
 
 # 각 스레드에 생성되는 객체(독립된 네임스페이스를 사용한다)
 thread_local = threading.local()
