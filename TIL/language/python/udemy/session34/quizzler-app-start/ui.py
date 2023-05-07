@@ -40,12 +40,27 @@ class QuizInterface:
         '''
         quiz_brain파일 안의 Quiz_brain class 이용, next_quetion()
         '''
-        q_text = self.quiz.next_question()
-        self.canvas.itemconfig(self.question_text, text=q_text)
-    
+        self.canvas.config(bg="white") # 문제 출력시 흰색 배경으로 변경
+        # 제공된 문제가 끝나고 버튼을 또 눌렸을때 index 에러가 나는 것을 막기 위해서 if문으로 판별 해줌
+        if self.quiz.still_has_questions():
+            self.score_label.config(text=f"Score : {self.quiz.score}")
+            q_text = self.quiz.next_question()
+            self.canvas.itemconfig(self.question_text, text=q_text)
+        else:
+            # 없으면 
+            self.canvas.itemconfig(self.question_text, text="You've reached the end of the quiz")
+            self.true_button.config(state="disabled")
+            self.false_button.config(state="disabled")
     # 참 거짓 판별
     def true_pressed(self): 
-        self.quiz.check_answer("True")
+        self.give_feedback(self.quiz.check_answer("True"))
     
     def false_pressed(self):
-        self.quiz.check_answer("False")
+        self.give_feedback(self.quiz.check_answer("False"))
+        
+    def give_feedback(self, is_right):
+        if is_right:
+            self.canvas.config(bg="green")
+        else:
+            self.canvas.config(bg="red")
+        self.window.after(1000, self.get_next_question)
