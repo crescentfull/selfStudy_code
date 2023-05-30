@@ -13,14 +13,18 @@ STOCK_API_KEY = "MQPQDNWIYMHUQPU4"
 
 #TODO 1. - Get yesterday's closing stock price. Hint: You can perform list comprehensions on Python dictionaries. e.g. [new_value for (key, value) in dictionary.items()]
 stock_params = {
-    "function" : "TIME_SERIES_INTRADAY_EXTENDED",
+    "function" : "TIME_SERIES_INTRADAY",
     "symbol" : STOCK_NAME,
+    "interval": '30min',
     "apikey" : STOCK_API_KEY
 }
 
 response = requests.get(STOCK_ENDPOINT, params=stock_params)
-print(response)
+print("Status Code : ", response)
+
 data = response.json()
+new_data = json.dumps(data, indent=4)
+print(new_data)
 # print(json.dumps(data, indent=4))
 
 #TODO 2. - Get the day before yesterday's closing stock price
