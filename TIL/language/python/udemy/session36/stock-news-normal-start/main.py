@@ -13,21 +13,23 @@ STOCK_API_KEY = "MQPQDNWIYMHUQPU4"
 
 #TODO 1. - Get yesterday's closing stock price. Hint: You can perform list comprehensions on Python dictionaries. e.g. [new_value for (key, value) in dictionary.items()]
 stock_params = {
-    "function" : "TIME_SERIES_INTRADAY",
+    "function" : "TIME_SERIES_DAILY_ADJUSTED",
     "symbol" : STOCK_NAME,
-    "interval": '30min',
     "apikey" : STOCK_API_KEY
 }
 
 response = requests.get(STOCK_ENDPOINT, params=stock_params)
 print("Status Code : ", response)
 
-data = response.json()
+data = response.json()["Time Series (Daily)"]
 new_data = json.dumps(data, indent=4)
-print(new_data)
-# print(json.dumps(data, indent=4))
+# print(new_data)
+data_list = [value for (key, value) in data.items()]
+yesterday_data = data_list[0]
+print(yesterday_data)
 
 #TODO 2. - Get the day before yesterday's closing stock price
+yesterday_closing_data = data_list[1]
 
 #TODO 3. - Find the positive difference between 1 and 2. e.g. 40 - 20 = -20, but the positive difference is 20. Hint: https://www.w3schools.com/python/ref_func_abs.asp
 #TODO 4. - Work out the percentage difference in price between closing price yesterday and closing price the day before yesterday.
