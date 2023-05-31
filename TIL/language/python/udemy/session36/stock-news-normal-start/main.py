@@ -26,12 +26,17 @@ new_data = json.dumps(data, indent=4)
 # print(new_data)
 data_list = [value for (key, value) in data.items()]
 yesterday_data = data_list[0]
-print(yesterday_data)
+yesterday_closing_prcie = yesterday_data["4. close"]
+print("어제 값 :", yesterday_closing_prcie)
 
 #TODO 2. - Get the day before yesterday's closing stock price
-yesterday_closing_data = data_list[1]
+day_before_yesterday_data = data_list[1]
+day_before_yesterday_closing_price = day_before_yesterday_data["4. close"]
+print("그저께 값 :", day_before_yesterday_closing_price)
 
 #TODO 3. - Find the positive difference between 1 and 2. e.g. 40 - 20 = -20, but the positive difference is 20. Hint: https://www.w3schools.com/python/ref_func_abs.asp
+difference = abs(float(yesterday_closing_prcie) - float(day_before_yesterday_closing_price))
+print("gap : ", difference)
 #TODO 4. - Work out the percentage difference in price between closing price yesterday and closing price the day before yesterday.
 
 #TODO 5. - If TODO4 percentage is greater than 5 then print("Get News").
