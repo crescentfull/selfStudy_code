@@ -39,11 +39,15 @@ headers = {
 
 pixel_creation_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs/{GRAPH_ID}"
 
+today = datetime.now()
+
 pixel_data = {
-    "date" : "20230613",
+    "date" : today.strftime("%Y%m%d"),
     "quantity" : "9.74"  
 }
 
 # 자전거 사용기록 넘기기 확인
 # response = requests.post(url=pixel_creation_endpoint, json=pixel_data, headers=headers)
 # print(response.text)
+
+update_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs/{GRAPH_ID}/{today.strftime('%Y%m%d')}"
