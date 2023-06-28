@@ -39,7 +39,7 @@ for exercise in result["exercises"]:
             "date": today_date,
             "time": now_time,
             "exercise": exercise["name"].title(),
-            "duration": exercise["dureation_min"],
+            "duration": exercise["duration_min"],
             "calories": exercise["nf_calories"]
         }
     }
