@@ -26,9 +26,30 @@ exercise_params = {
     "age" : 30
 }
 
-response = requests.post(url=nutritionix_endpoint, json=exercise_params, headers=headers)
-result = response.json()
+# ### no auth
+# response = requests.post(url=nutritionix_endpoint, json=exercise_params, headers=headers)
 
+
+# ### basic auth
+# sheet_response = requests.post(
+#     sheet_endpoint,
+#     json=sheet_inputs,
+#     auth=(
+#         USERNAME,
+#         PASSWORD,
+#     )
+# )
+
+### bearer auth
+bearer_headers = {
+    "Suthorization" : "Bearer YOUR_TOKEN"
+}
+sheet_response = requests.post(
+    sheet_endpoint,
+    json=sheet_inputs,
+    headers=bearer_headers
+)
+result = response.json()
 ###
 today_date = datetime.now().strftime("%d/%m/%Y")
 now_time = datetime.now().strftime("%X")
