@@ -25,3 +25,19 @@ N개의 숫자가 공백 없이 써 있다.
 7
 
 '''
+
+# 문제 북석
+# 리스트 사용, 12
+
+
+numbers = list((int, input()))
+print(numbers)
+
+sum = 0
+
+for i in numbers:
+    sum = sum + i
+    
+print(sum)
+
+# 제발 까먹지마라;;; 바보냐
