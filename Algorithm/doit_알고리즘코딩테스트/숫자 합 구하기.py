@@ -30,14 +30,14 @@ N개의 숫자가 공백 없이 써 있다.
 # 리스트 사용, 12
 
 
-numbers = list((int, input()))
+numbers = list((input()))
 print(numbers)
 
 sum = 0
 
 for i in numbers:
-    sum = sum + i
+    sum = sum + int(i)
     
 print(sum)
 
-# 제발 까먹지마라;;; 바보냐
+# 제발 이런거 헷갈리지마라;;; 바보냐
