@@ -26,9 +26,15 @@
 66.666667
 '''
 
-n = list(input("값").split())
-n = [int(i) for i in n]
-print(n)
+# n = list(input("값").split())
+# n = [int(i) for i in n]
+# print(n)
 
-max_num = max(n)
-print(round((sum(n)*100)/max_num/3,6))
+# max_num = max(n)
+# print(round((sum(n)*100)/max_num/3,6))
+
+n = input()
+myList = list(map(int, input().split()))
+myMax = max(myList)
+sum = sum(myList)
+print(round(sum*100/ myMax / int(n),6))
