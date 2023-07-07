@@ -4,13 +4,13 @@
 
 import sys
 input = sys.stdin.readline
-n, m = map(int, input().split())
-A = [[0] * (n+1)]
-D = [[0] * (n+1) for _ in range(n+1)]
+n, m = map(int, input().split()) # n 리스트크기 , m 질의 수
+A = [[0] * (n+1)] # 원본 리스트
+D = [[0] * (n+1) for _ in range(n+1)]  # 합 배열
 
 for i in range(n):
     A_row = [0] + [int(x) for x in input().split()]
-    A.append(A_row)
+    A.append(A_row) # 원본 리스트에 데이터 저장
 
 for i in range(1, n+1):
     for j in range(1, n+1):
