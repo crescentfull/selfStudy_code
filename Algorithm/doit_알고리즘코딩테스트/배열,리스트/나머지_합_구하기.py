@@ -30,3 +30,11 @@ for i in range(n):
     remainder = S[i] % m
     if remainder ==0:
         answer += 1
+    C[remainder] += 1
+    
+for i in range(m):
+    # 나머지가 같은 인덱스 중 2개를 뽑는 경우의 수 더해줌
+    if C[i] > 1:
+        answer += (C[i] * (C[i] - 1) // 2) # / 연산은 float형태로 반환되어 오류, // 사용
+
+print(answer)        
