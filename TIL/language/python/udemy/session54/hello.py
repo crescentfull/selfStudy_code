@@ -17,8 +17,15 @@
 '''
 
 from flask import Flask
-app = Flask(__name__)
+app = Flask(__name__) 
+# __name__은 파이썬에 내장된 특수속성의 하나이다.
+# __name__에 접근하면 현재 사용 중인 클래스나 함수, 메소드, 디스크립터의 이름을 알 수 있다.
+# flask는 __name__을 받으면 현재 실행 중인 파일에 애플리케이션 코드가 있는지 확인한다.
+# 
 
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
+
+if __name__ == "__main__":
+    app.run()
