@@ -24,6 +24,14 @@ app = Flask(__name__)
 # 
 
 @app.route('/')
+# Python Decorators
+# 데코레이터라는 것은 무엇일까요?
+# 여러분이 사용하는 클래스나 모듈에 각종 함수가 들어있는데
+# 각 함수에 기능을 따로 추가하고 싶어요 그럴때
+
+# 파이썬 함수는 '일급 객체'로 알려져있다.
+# 즉 함수를 인자로 전달할 수 있다.
+# 
 def hello_world():
     return 'Hello, World!'
 
