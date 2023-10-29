@@ -23,7 +23,7 @@ app = Flask(__name__)
 # flask는 __name__을 받으면 현재 실행 중인 파일에 애플리케이션 코드가 있는지 확인한다.
 # 
 
-@app.route('/')
+
 # Python Decorators
 # 데코레이터라는 것은 무엇일까요?
 # 여러분이 사용하는 클래스나 모듈에 각종 함수가 들어있는데
@@ -32,8 +32,13 @@ app = Flask(__name__)
 # 파이썬 함수는 '일급 객체'로 알려져있다.
 # 즉 함수를 인자로 전달할 수 있다.
 # 
+@app.route('/')
 def hello_world():
     return 'Hello, World!'
+
+@app.route('/bye')
+def say_bye():
+    return "Bye"
 
 if __name__ == "__main__":
     app.run()

@@ -9,10 +9,10 @@ import time
 
 def delay_decorator(function):
     def wrapper_function():
-        time.sleep(2)
-        #Do something before
+        time.sleep(2) #시간지연
+        #Do something before 함수실행
         function()
-        #Do something after
+        #Do something after 함수실행
     return wrapper_function
 
 @delay_decorator
@@ -26,3 +26,8 @@ def say_bye():
     
 def say_greeting():
     print("How are you?")
+
+say_greeting()
+
+decorated_function = delay_decorator(say_greeting)
+decorated_function() 
