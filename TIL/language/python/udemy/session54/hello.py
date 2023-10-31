@@ -40,9 +40,9 @@ def hello_world():
 def say_bye():
     return "Bye"
 
-@app.route('/user/<name>')  
-def greet(name):
-    return f"Hello {name}!"
+@app.route('/user/<name>/<int:number>')  
+def greet(name, number):
+    return f"Hello {name}!, welcome {number}"
 
 if __name__ == "__main__":
     app.run(debug=True) # 디버그모드 , 코드 편집시 자동 재시동, 웹페이지 상 error메세지 출력
