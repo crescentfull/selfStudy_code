@@ -1,6 +1,6 @@
-def logging_decorator():
-    def wrapper():
-        function()
+def logging_decorator(fn):
+    def wrapper(*args):
+        
     return wrapper
 
 def a_function(a, b, c):
