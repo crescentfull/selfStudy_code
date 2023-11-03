@@ -1,0 +1,1 @@
+inputs = eval(input("입력 :"))
