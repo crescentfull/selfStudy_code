@@ -9,6 +9,7 @@ for post in posts:
     post_obj = Post(post["id"], post["title"], post["subtitle"], post["body"])
     post_objects.append(post_obj)
 
+print(posts)
 app = Flask(__name__)
 
 
