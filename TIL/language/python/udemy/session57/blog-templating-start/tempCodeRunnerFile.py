@@ -17,7 +17,7 @@ def home():
 
 @app.route('/post/<int:num>')
 def show_post(num):
-    return render_template('post.html', all_posts=all_posts, post_id=num)
+    return render_template('post.html', all_posts=all_posts)
 
 if __name__ == "__main__":
     app.run(debug=True)
