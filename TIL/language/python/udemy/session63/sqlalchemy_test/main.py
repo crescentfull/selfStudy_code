@@ -34,7 +34,30 @@ with app.app_context():
     db.create_all()
     # db.drop_all()
 
-    new_book = Book(title="Harry Potter", author="J.K.Rowling", rating="9.3")
-    db.session.add(new_book)
-    db.session.commit()
-    all_books = db.session.query(Book).all()
+    ## 레코드생성
+    # new_book = Book(title="Harry Potter", author="J.K.Rowling", rating="9.3")
+    # db.session.add(new_book)
+    # db.session.commit()
+    
+    ## 특정 레코드 조회
+    book = Book.query.filter_by(title="Harry Potter").first()
+    
+    ## 모든 레코드 조회
+    # all_books = db.session.query(Book).all()
+    
+    ## 특정 레코드 업데이트
+    # book_to_update = Book.query.filter_by(title="Harry Potter").first()
+    # book_to_update.title = "Harry Potter and the Chmber of Secrets"
+    # db.session.commit()
+    
+    ## 기본키 레코드 업데이트
+    # book_id = 1
+    # book_to_update = Book.query.get(book_id)
+    # book_to_update.title = "Harry Potter and the Goblet of fire"
+    # db.session.commit()
+    
+    ## 기본키로 특정 레코드 삭제
+    # book_id = 1
+    # book_to_delete = Book.query.get(book_id)
+    # db.session.delete(book_to_delete)
+    # db.session.commit()
