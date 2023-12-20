@@ -32,5 +32,9 @@ class Book(db.Model):
 # 이렇게 함으로써 Flask 애플리케이션 설정에 접근할 수 있음    
 with app.app_context():
     db.create_all()
+    # db.drop_all()
 
-
+    new_book = Book(title="Harry Potter", author="J.K.Rowling", rating="9.3")
+    db.session.add(new_book)
+    db.session.commit()
+    all_books = db.session.query(Book).all()
