@@ -16,10 +16,14 @@ class Book(db.Model):
     rating = db.Column(db.Float, nullable=False)
     
 with app.app_context():
+    
+    all_books = db.session.query(Book).all()
     db.create_all()
+
 
 @app.route('/')
 def home():
+    
     print("all_books : ", all_books)
     return render_template("index.html", books=all_books)
 
