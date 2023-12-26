@@ -30,13 +30,15 @@ def home():
 @app.route("/add", methods=["GET", "POST"])
 def add():
     if request.method == "POST":
-        # new_book = {
-        #     "title" : request.form["title"],
-        #     "author" : request.form["author"],
-        #     "rating" : request.form["rating"]
-        # }
-        new_book = request.form.to_dict()
-        all_books.append(new_book)
+        new_book = {
+            "title" : request.form["title"],
+            "author" : request.form["author"],
+            "rating" : request.form["rating"]
+        }
+        # new_book = request.form.to_dict()
+        # all_books.append(new_book)
+        db.session.add_all(new_book)
+        db.session.commit()
         print("new_book : ", new_book)
         return redirect(url_for('home'))
     
