@@ -57,7 +57,7 @@ app = Flask(__name__)
 
 db = SQLAlchemy()
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///new-books-collection.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///books.db"
 db.init_app(app)
 
 
@@ -70,9 +70,12 @@ class Books(db.Model):
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    with app.app_context():
-        all_books = db.session.query(Books).all()
-    return render_template('index.html', library=all_books)
+    if db.session.query(Books).exists():
+        with app.app_context():
+            all_books = db.session.query(Books).all()
+        return render_template('index.html', library=all_books)    
+    else:
+        return render_template('index.html')
 
 
 @app.route("/add", methods=['GET', 'POST'])
