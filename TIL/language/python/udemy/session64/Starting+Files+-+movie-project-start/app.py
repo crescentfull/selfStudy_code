@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_bootstrap import Bootstrap
 from models import db, Movie
 from forms import MovieForm, UpdateMovieForm
@@ -18,26 +18,39 @@ def create_app():
 
     @app.route("/add", methods=["GET", "POST"])
     def add():
-        form = MovieForm()
-        if form.validate_on_submit():
-            new_movie = Movie(
-                title=form.title.data,
-                year=form.year.data,
-                description=form.description.data,
-                rating=form.rating.data,
-                ranking=form.ranking.data,
-                review=form.review.data,
-                img_url=form.img_url.data
-            )
-            db.session.add(new_movie)
-            db.session.commit()
-            return redirect(url_for('home'))
+        # form = MovieForm()
+        # if form.validate_on_submit():
+        #     new_movie = Movie(
+        #         title=form.title.data,
+        #         year=form.year.data,
+        #         description=form.description.data,
+        #         rating=form.rating.data,
+        #         ranking=form.ranking.data,
+        #         review=form.review.data,
+        #         img_url=form.img_url.data
+        #     )
+        #     db.session.add(new_movie)
+        #     db.session.commit()
+        #     return redirect(url_for('home'))
+        #         # 데이터 추가 test
+        new_movie = Movie(
+            title="Phone Booth",
+            year=2002,
+            description="Publicist Stuart Shepard finds himself trapped in a phone booth, pinned down by an extortionist's sniper rifle. Unable to leave or receive outside help, Stuart's negotiation with the caller leads to a jaw-dropping climax.",
+            rating=7.3,
+            ranking=10,
+            review="My favourite character was the caller.",
+            img_url="https://image.tmdb.org/t/p/w500/tjrX2oWRCM3Tvarz38zlZM7Uc10.jpg"
+        )
+        db.session.add(new_movie)
+        db.session.commit()
+        return redirect(url_for('home'))
         return render_template("add.html", form=form)
     
     @app.route("/update", methods=["GET","POST"])
     def update():
         form = UpdateMovieForm()
-        movie_id = request.args.get("id")
+        movie_id = request.args.get("movie_id")
         print(movie_id)
         movie = Movie.query.get(movie_id)
         print(movie)
@@ -49,20 +62,15 @@ def create_app():
             db.session.commit()
             return redirect(url_for('home'))
         return render_template("edit.html", movie=movie, form=form)
-
-        # 데이터 추가 test
-        # new_movie = Movie(
-        #     title="Phone Booth",
-        #     year=2002,
-        #     description="Publicist Stuart Shepard finds himself trapped in a phone booth, pinned down by an extortionist's sniper rifle. Unable to leave or receive outside help, Stuart's negotiation with the caller leads to a jaw-dropping climax.",
-        #     rating=7.3,
-        #     ranking=10,
-        #     review="My favourite character was the caller.",
-        #     img_url="https://image.tmdb.org/t/p/w500/tjrX2oWRCM3Tvarz38zlZM7Uc10.jpg"
-        # )
-        # db.session.add(new_movie)
-        # db.session.commit()
-        # return redirect(url_for('home'))
+    
+    @app.route("/delete/<int:movie_id>")
+    def delete(movie_id):
+            post = Movie.query.get(movie_id)
+            print(post)
+            db.session.delete(post)
+            db.session.commit()
+            flash('삭제하였습니다.')
+            return redirect(url_for('home'))
     return app
 
 if __name__ == '__main__':
