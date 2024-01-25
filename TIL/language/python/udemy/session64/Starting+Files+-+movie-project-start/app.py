@@ -18,33 +18,33 @@ def create_app():
 
     @app.route("/add", methods=["GET", "POST"])
     def add():
-        # form = MovieForm()
-        # if form.validate_on_submit():
-        #     new_movie = Movie(
-        #         title=form.title.data,
-        #         year=form.year.data,
-        #         description=form.description.data,
-        #         rating=form.rating.data,
-        #         ranking=form.ranking.data,
-        #         review=form.review.data,
-        #         img_url=form.img_url.data
-        #     )
-        #     db.session.add(new_movie)
-        #     db.session.commit()
-        #     return redirect(url_for('home'))
+        form = MovieForm()
+        if form.validate_on_submit():
+            new_movie = Movie(
+                title=form.title.data,
+                year=form.year.data,
+                description=form.description.data,
+                rating=form.rating.data,
+                ranking=form.ranking.data,
+                review=form.review.data,
+                img_url=form.img_url.data
+            )
+            db.session.add(new_movie)
+            db.session.commit()
+            return redirect(url_for('home'))
         #         # 데이터 추가 test
-        new_movie = Movie(
-            title="Phone Booth",
-            year=2002,
-            description="Publicist Stuart Shepard finds himself trapped in a phone booth, pinned down by an extortionist's sniper rifle. Unable to leave or receive outside help, Stuart's negotiation with the caller leads to a jaw-dropping climax.",
-            rating=7.3,
-            ranking=10,
-            review="My favourite character was the caller.",
-            img_url="https://image.tmdb.org/t/p/w500/tjrX2oWRCM3Tvarz38zlZM7Uc10.jpg"
-        )
-        db.session.add(new_movie)
-        db.session.commit()
-        return redirect(url_for('home'))
+        # new_movie = Movie(
+        #     title="Phone Booth",
+        #     year=2002,
+        #     description="Publicist Stuart Shepard finds himself trapped in a phone booth, pinned down by an extortionist's sniper rifle. Unable to leave or receive outside help, Stuart's negotiation with the caller leads to a jaw-dropping climax.",
+        #     rating=7.3,
+        #     ranking=10,
+        #     review="My favourite character was the caller.",
+        #     img_url="https://image.tmdb.org/t/p/w500/tjrX2oWRCM3Tvarz38zlZM7Uc10.jpg"
+        # )
+        # db.session.add(new_movie)
+        # db.session.commit()
+        # return redirect(url_for('home'))
         return render_template("add.html", form=form)
     
     @app.route("/update", methods=["GET","POST"])
