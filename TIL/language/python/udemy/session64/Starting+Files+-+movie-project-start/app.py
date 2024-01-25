@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
 from models import db, Movie
-from forms import MovieForm
+from forms import MovieForm, UpdateMovieForm
 from config import Config
 
 def create_app():
@@ -33,6 +33,22 @@ def create_app():
             db.session.commit()
             return redirect(url_for('home'))
         return render_template("add.html", form=form)
+    
+    @app.route("/update", methods=["GET","POST"])
+    def update():
+        form = UpdateMovieForm()
+        movie_id = request.args.get("id")
+        print(movie_id)
+        movie = Movie.query.get(movie_id)
+        print(movie)
+        print("form.rating.data : ", form.rating.data)
+        print("form.review.data : ", form.review.data)
+        if form.validate_on_submit():
+            movie.rating = float(form.rating.data)
+            movie.review = form.review.data
+            db.session.commit()
+            return redirect(url_for('home'))
+        return render_template("edit.html", movie=movie, form=form)
 
         # 데이터 추가 test
         # new_movie = Movie(

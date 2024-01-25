@@ -11,3 +11,8 @@ class MovieForm(FlaskForm):
     review = StringField('Review', validators=[DataRequired()])
     img_url = StringField('Image URL', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+class UpdateMovieForm(FlaskForm):
+    rating = StringField("Your Rating Out of 10 e.g. 7.5", validators=[DataRequired()])
+    review = StringField("Your Review", validators=[DataRequired()])
+    submit = SubmitField("Done")
