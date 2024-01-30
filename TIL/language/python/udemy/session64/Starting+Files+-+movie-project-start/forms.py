@@ -16,3 +16,7 @@ class UpdateMovieForm(FlaskForm):
     rating = StringField("Your Rating Out of 10 e.g. 7.5", validators=[DataRequired()])
     review = StringField("Your Review", validators=[DataRequired()])
     submit = SubmitField("Done")
+    
+class FindMovieForm(FlaskForm):
+    title = StringField("Movie Title", validators=[DataRequired()])
+    submit = SubmitField("Add Movie")
