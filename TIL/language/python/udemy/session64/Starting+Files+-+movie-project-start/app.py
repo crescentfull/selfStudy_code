@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_bootstrap import Bootstrap
 from models import db, Movie
 from forms import MovieForm, UpdateMovieForm, FindMovieForm
@@ -23,7 +23,7 @@ def create_app():
         form = FindMovieForm()
         if form.validate_on_submit():
             MOVIE_DB_SEARCH_URL = "https://api.themoviedb.org/3/search/movie"
-            MOVIE_DB_API_KEY = "12345"
+            MOVIE_DB_API_KEY = Config.MOVIE_DB_API_KEY
             movie_title = form.title.data
             response = requests.get(MOVIE_DB_SEARCH_URL, params={"api_key": MOVIE_DB_API_KEY, "query": movie_title})
             data = response.json()["results"]
