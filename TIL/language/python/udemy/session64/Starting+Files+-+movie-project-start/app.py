@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from models import db, Movie
 from forms import MovieForm, UpdateMovieForm, FindMovieForm
 from config import Config
-
+import json
 import requests
 
 def create_app():
@@ -41,7 +41,7 @@ def create_app():
             response = requests.get(movie_api_url, params={"api_key": MOVIE_DB_API_KEY, "language": "en-US"})
             print(response)
             data = response.json()
-            print(data)
+            print(json.dumps(data, indent=4))
             new_movie = Movie(
                 title=data["original_title"],
                 year=data["release_date"].split("-")[0],
