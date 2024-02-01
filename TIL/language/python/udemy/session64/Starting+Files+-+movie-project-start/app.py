@@ -39,12 +39,16 @@ def create_app():
         if movie_api_id:
             movie_api_url = f"{MOVIE_DB_INFO_URL}/{movie_api_id}"
             response = requests.get(movie_api_url, params={"api_key": MOVIE_DB_API_KEY, "language": "en-US"})
+            print(response)
             data = response.json()
+            print(data)
             new_movie = Movie(
-                title=data["title"],
+                title=data["original_title"],
                 year=data["release_date"].split("-")[0],
                 img_url=f"{MOVIE_DB_IMAGE_URL}{data['poster_path']}",
-                description=data["overview"]
+                description=data["overview"],
+                rating=data["vote_average"]
+                review=data["title"]
             )
             db.session.add(new_movie)
             db.session.commit()
