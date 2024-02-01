@@ -1,9 +1,8 @@
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_bootstrap import Bootstrap
 from models import db, Movie
-from forms import MovieForm, UpdateMovieForm, FindMovieForm
+from forms import UpdateMovieForm, FindMovieForm
 from config import Config
-import json
 import requests
 
 def create_app():
@@ -24,6 +23,7 @@ def create_app():
     @app.route("/add", methods=["GET", "POST"])
     def add_movie():
         form = FindMovieForm()
+        
         if form.validate_on_submit():
             movie_title = form.title.data
             response = requests.get(MOVIE_DB_SEARCH_URL, params={"api_key": MOVIE_DB_API_KEY, "query": movie_title})
@@ -35,13 +35,12 @@ def create_app():
     def find_movie():
         MOVIE_DB_INFO_URL = "https://api.themoviedb.org/3/movie"
         MOVIE_DB_IMAGE_URL = "https://image.tmdb.org/t/p/w500"
-        movie_api_id = request.args.get("id")
+        movie_api_id = request.args.get("movie_id")
+        
         if movie_api_id:
             movie_api_url = f"{MOVIE_DB_INFO_URL}/{movie_api_id}"
             response = requests.get(movie_api_url, params={"api_key": MOVIE_DB_API_KEY, "language": "en-US"})
-            print(response)
             data = response.json()
-            print(json.dumps(data, indent=4))
             new_movie = Movie(
                 title=data["original_title"],
                 year=data["release_date"].split("-")[0],
@@ -52,17 +51,14 @@ def create_app():
             )
             db.session.add(new_movie)
             db.session.commit()
-            return redirect(url_for("home"))
+            return redirect(url_for("update", movie_id=new_movie.id))
     
     @app.route("/update", methods=["GET","POST"])
     def update():
         form = UpdateMovieForm()
-        movie_id = request.args.get("movie_id")
-        print(movie_id)
+        movie_id = request.args.get("movie_id") #
         movie = Movie.query.get(movie_id)
-        print(movie)
-        print("form.rating.data : ", form.rating.data)
-        print("form.review.data : ", form.review.data)
+        
         if form.validate_on_submit():
             movie.rating = float(form.rating.data)
             movie.review = form.review.data
@@ -73,7 +69,6 @@ def create_app():
     @app.route("/delete/<int:movie_id>")
     def delete(movie_id):
             post = Movie.query.get(movie_id)
-            print(post)
             db.session.delete(post)
             db.session.commit()
             flash('삭제하였습니다.')
