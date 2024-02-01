@@ -16,7 +16,8 @@ def create_app():
 
     @app.route("/")
     def home():
-        all_movies = Movie.query.all()
+        all_movies = Movie.query.order_by(Movie.rating.desc()).all()
+        db.session.commit()
         return render_template("index.html", movie_list=all_movies)
 
 

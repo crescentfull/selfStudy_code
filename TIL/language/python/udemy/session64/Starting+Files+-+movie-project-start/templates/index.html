@@ -24,9 +24,9 @@
 
     {%for movie in movie_list%}
     <div class="card">
+        <h3> RANKING {{ loop.index }}</h3>
         <div class="front" style="background-image: url('{{movie.img_url}}');">
             <p class="small">{{movie.review}}</p><br>
-            <!-- <p class="medium">{{movie.ranking}}</p> -->
         </div>
         <div class="back">
             <div>
@@ -44,6 +44,7 @@
             </div>
         </div>
     </div>
+    <br/>
     {%endfor%}
 </div>
 
