@@ -1,11 +1,16 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, current_app
 from flask_sqlalchemy import SQLAlchemy
-import random, json
+from dotenv import load_dotenv
+
+import random
+import os
 
 app = Flask(__name__)
 
 ##Connect to Database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cafes.db'
+load_dotenv()
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -23,10 +28,11 @@ class Cafe(db.Model):
     has_sockets = db.Column(db.Boolean, nullable=False)
     can_take_calls = db.Column(db.Boolean, nullable=False)
     coffee_price = db.Column(db.String(250), nullable=True)
-
+    
     def to_dict(self):
-        """ 객체 속성을 딕셔너리로 변화 """
-        return {column.name: getattr(self, column.name) for column in self.__table__.columns}
+            """ 객체 속성을 딕셔너리로 변화 """
+            return {column.name: getattr(self, column.name) for column in self.__table__.columns}
+
 
 @app.route("/")
 def home():
@@ -34,22 +40,27 @@ def home():
     
 
 ## HTTP GET - Read Record
-@app.route("/random") # get은 모든 루트에서 접근하기 때문에 없는게 낫다
+@app.route("/random")
 def get_random_cafe():
     cafes = db.session.query(Cafe).all()
-    random_cafe = random.choice(cafes)
-    return jsonify(cafe=random_cafe.to_dict())
+    if cafes:
+        random_cafe = random.choice(cafes)
+        return jsonify(cafe=random_cafe.to_dict())
+    else:
+        return jsonify(error="No cafes found in the database."), 404
 
 @app.route("/all")
-def get_all():
+def get_all_cafes():
     cafes = db.session.query(Cafe).all()
-    return jsonify(cafes=[Cafe.to_dict() for cafe in cafes])
+    return jsonify([cafe.to_dict() for cafe in cafes]) # list에 dict 
 ## HTTP POST - Create Record
 
 ## HTTP PUT/PATCH - Update Record
 
 ## HTTP DELETE - Delete Record
 
-
+with app.app_context():
+    db.create_all()
+    
 if __name__ == '__main__':
     app.run(debug=True)
