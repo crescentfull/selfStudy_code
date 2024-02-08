@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template, request, current_app
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import or_
 from dotenv import load_dotenv
 
 import random
@@ -56,12 +57,38 @@ def get_all_cafes():
 
 @app.route("/search")
 def get_cafe_location():
-    query_location = request.args.get("loc")
-    cafes = db.session.query(Cafe).filter(Cafe.location.like(f"%{query_location}%")).all()
-    if cafes:
-        return jsonify(cafe=[cafe.to_dict() for cafe in cafes] )
-    else:
-        return jsonify(error={"NOT FOUND":"Sorry, we don't have a cafe at that location"}), 404
+    try:
+        query_location = request.args.get("loc")
+        query_name = request.args.get("name")
+
+        if not query_location and not query_name:
+            raise ValueError("At least one of 'loc' or 'name' parameters must be provided.")
+
+        query_conditions = []
+        if query_location:
+            query_conditions.append(Cafe.location.like(f"%{query_location}%"))
+        if query_name:
+            query_conditions.append(Cafe.name.like(f"%{query_name}%"))
+
+        cafes = db.session.query(Cafe).filter(or_(*query_conditions)).all()
+
+        if cafes:
+            return jsonify(cafe=[cafe.to_dict() for cafe in cafes])
+        else:
+            return jsonify(error={"NOT FOUND": "Sorry, we couldn't find a matching cafe"}), 404
+    except ValueError as e:
+        return jsonify(error={"Invalid Request": str(e)}), 400
+    except Exception as e:
+        return jsonify(error={"Unexpected Error": str(e)}), 500
+
+# @app.route("/search/<name>")
+# def get_cafe_name(name):
+#     query_location = request.args.get(name)
+#     cafes = db.session.query(Cafe).filter(Cafe.name.like(f"%{name}%")).all()
+#     if cafes:
+#         return jsonify(cafe=[cafe.to_dict() for cafe in cafes] )
+#     else:
+#         return jsonify(error={"NOT FOUND":"Sorry, we don't have a cafe as that name"}), 404
     
 ## HTTP POST - Create Record
 @app.route("/add", methods=['POST'])
