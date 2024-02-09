@@ -94,8 +94,8 @@ def add_new_cafe():
                     has_toilet  = data['has_toilet'],
                     has_wifi     = data['has_wifi'],
                     has_sockets = data['has_sockets'],
-                    can_take_calls = data['calls'],
-                    coffee_price = data['price']
+                    can_take_calls = data['can_take_calls'],
+                    coffee_price = data['coffee_price']
         )
         db.session.add(new_cafe)
         db.session.commit()
@@ -118,8 +118,8 @@ def put_cafe(cafe_id):
             cafe.has_toilet = data['has_toilet']
             cafe.has_wifi = data['has_wifi']
             cafe.has_sockets = data['has_sockets']
-            cafe.can_take_calls = data['calls']
-            cafe.coffee_price = data['price']
+            cafe.can_take_calls = data['can_take_calls']
+            cafe.coffee_price = data['coffee_price']
             db.session.commit()
             return jsonify({"message": "Cafe updated successfully"}), 200
         except KeyError as e:
@@ -131,7 +131,7 @@ def put_cafe(cafe_id):
     
 @app.route('/patch/<int:cafe_id>', methods=['PATCH'])
 def patch_cafe(cafe_id):
-    cafe = Cafe.query.get(cafe_id)
+    cafe = db.session.query(Cafe).get(cafe_id) #Cafe.query.get(cafe_id)
     if not cafe:
         return jsonify({"error": "Cafe not found"}), 404
 
