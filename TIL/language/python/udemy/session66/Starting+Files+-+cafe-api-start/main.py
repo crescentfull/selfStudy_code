@@ -129,15 +129,21 @@ def put_cafe(cafe_id):
     else:
         return jsonify({"error": "Cafe not found"}), 404
     
-@app.route('/patch/<int:id>', methods=['PATCH'])
-def patch_cafe(id):
-    try:
+@app.route('/patch/<int:cafe_id>', methods=['PATCH'])
+def patch_cafe(cafe_id):
+    cafe = Cafe.query.get(cafe_id)
+    if cafe:
         data = request.get_json()
-        cafe = db.session.query(Cafe).filter_by(id=id)
-        
-        return jsonify({"message":"patch success!", 'data':data})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        for key, value in data.items():
+            if hasattr(cafe, key):
+                setattr(cafe, key, value)
+        try:
+            db.session.commit()
+            return jsonify({"message": "Cafe updated successfully"}), 200
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+    else:
+        return jsonify({"error": "Cafe not found"}), 404
 ## HTTP DELETE - Delete Record
 
 with app.app_context():
