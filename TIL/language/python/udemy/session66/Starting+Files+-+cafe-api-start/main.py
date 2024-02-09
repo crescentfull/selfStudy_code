@@ -159,6 +159,35 @@ def patch_cafe(cafe_id):
         return jsonify({"error": "No valid fields provided for update"})
     
 ## HTTP DELETE - Delete Record
+@app.route('/delete/<int:cafe_id>', methods=['DELETE'])
+def delete(cafe_id):
+    try:
+        cafe = db.session.query(Cafe).get(cafe_id)
+        if cafe:
+            db.session.delete(cafe)
+            db.session.commit()
+            return jsonify({"message": f"Cafe with id '{cafe_id}' successfully deleted"}), 200
+        else:
+            return jsonify({"error": "Cafe not found"}), 404
+    except Exception as e:
+        db.session.rollback()  # 오류 발생 시 변경 사항 롤백
+        return jsonify({"error": str(e)}), 500
+
+'''
+if문을 사용하여 먼저 검사하는 방식
+이 방식은 코드의 읽기 쉬움과 명확성을 강조합니다. 먼저 조건을 검사하여 존재 여부를 확인하고, 존재하지 않는 경우 바로 처리합니다. 이 접근 방식은 다음과 같은 이점을 가집니다:
+
+명확성: 코드가 수행하는 작업과 조건 검사가 명확하게 분리되어 있어, 읽기 쉽고 이해하기 쉽습니다.
+예측 가능성: 예외 처리를 최소화하여, 예상 가능한 흐름을 따릅니다. 존재하지 않는 객체에 대한 처리를 명시적으로 보여주며, 예외는 예상치 못한 오류에 대비해 사용됩니다.
+try-except 블록 내에서 처리하는 방식
+이 방식은 예외 처리를 통해 오류 상황을 관리합니다. 코드 실행을 시도하고, 예외가 발생하면 적절하게 처리합니다. 이 접근 방식은 다음과 같은 이점을 가집니다:
+
+오류 관리: 예외 처리를 통해 다양한 오류 상황을 더 유연하게 관리할 수 있습니다. 특히, 예상치 못한 오류에 대해 더 넓은 범위로 대응할 수 있습니다.
+트랜잭션 관리: 데이터베이스 작업에서 try-except 블록을 사용하면, 오류 발생 시 롤백을 통해 데이터 일관성을 유지하기 쉽습니다.
+어느 것이 더 유용한가?
+단순한 존재 여부 검사에는 if문을 사용한 접근 방식이 더 깔끔하고 직관적일 수 있습니다.
+복잡한 오류 처리가 필요하거나 여러 종류의 예외를 관리해야 하는 상황에서는 try-except 접근 방식이 더 적합할 수 있습니다.
+'''
 
 with app.app_context():
     db.create_all()
