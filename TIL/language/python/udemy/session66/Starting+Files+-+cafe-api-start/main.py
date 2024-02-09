@@ -132,18 +132,32 @@ def put_cafe(cafe_id):
 @app.route('/patch/<int:cafe_id>', methods=['PATCH'])
 def patch_cafe(cafe_id):
     cafe = Cafe.query.get(cafe_id)
-    if cafe:
-        data = request.get_json()
-        for key, value in data.items():
-            if hasattr(cafe, key):
-                setattr(cafe, key, value)
+    if not cafe:
+        return jsonify({"error": "Cafe not found"}), 404
+
+    data = request.get_json()
+    updated_fields = {}
+
+    for key, value in data.items():
+        # 모델에 속성이 존재하는지 확인
+        if hasattr(cafe, key):
+            setattr(cafe, key, value)
+            updated_fields[key] = value
+        else:
+            # 제공된 키가 모델 속성에 없는 경우 경고 메시지를 포함
+            return jsonify({"warning": f"Field '{key}' does not exist in Cafe model and was ignored."}), 400
+
+    if updated_fields:
         try:
             db.session.commit()
-            return jsonify({"message": "Cafe updated successfully"}), 200
+            return jsonify({"message": "Cafe updated successfully", "updated_fields": updated_fields}), 200
         except Exception as e:
+            db.session.rollback()  # 오류 발생 시 변경 사항 롤백
             return jsonify({"error": str(e)}), 500
     else:
-        return jsonify({"error": "Cafe not found"}), 404
+        # 업데이트할 필드가 없는 경우
+        return jsonify({"error": "No valid fields provided for update"})
+    
 ## HTTP DELETE - Delete Record
 
 with app.app_context():
