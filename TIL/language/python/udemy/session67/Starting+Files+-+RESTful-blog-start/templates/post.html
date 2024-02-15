@@ -24,7 +24,13 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <p>
-            {{post.body}}
+            <!-- CKEditorField의 데이터는 HTML로 저장되며, 여기에는 블로그 게시물의 모든 구조와 스타일이 포함됩니다. 
+              블로그 게시물의 post.html 페이지로 이동했을 때 이러한 구조가 반영되도록 하려면 Jinja safe() filter를 추가해야 합니다.
+              이렇게 하면 진자(Jinja)가 post.html 템플릿을 렌더링할 때 HTML을 텍스트로 처리하지 않게 됩니다.
+              진자 필터를 적용하려면 파이프 기호 '|'가 필요하며, 이 기호는 진자 표현식과 진자 필터 사이에 들어갑니다.
+              예) {‌{ Jinja 표현식 | Jinja 필터 }} -->
+            {{post.body|safe}}
+            <!--  -->
           </p>
            <hr>
            <div class="clearfix">
