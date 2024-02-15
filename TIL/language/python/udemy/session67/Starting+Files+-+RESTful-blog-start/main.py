@@ -54,11 +54,18 @@ def show_post(post_id):
     flash(f"show post {post_id}", category="success")
     return render_template("post.html", post=requested_post)
 
-@app.route("/edit/<int:post_id>")
+@app.route("/edit/<int:post_id>", methods=["GET", "POST"])
 def edit_post(post_id):
-    requested_post = BlogPost.query.get(post_id)
-    post = request.form.get('body')
-    return render_template("make-post.html", post=requested_post)
+    post = BlogPost.query.get(post_id)
+    # eidt form화면에 data 불러오기
+    edit_form = CreatePostForm(
+        title = post.title,
+        subtitle = post.subtitle,
+        img_url = post.img_url,
+        author = post.author,
+        body = post.body
+    )
+    return render_template("make-post.html", form=edit_form, is_edit=True)
 
 @app.route("/add/", methods=["GET", "POST"])
 def add_new_post():
