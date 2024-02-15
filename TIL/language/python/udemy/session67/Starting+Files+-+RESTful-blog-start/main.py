@@ -50,8 +50,8 @@ def get_all_posts():
 
 @app.route("/post/<int:post_id>")
 def show_post(post_id):
-    flash(f"show post {post_id}")
     requested_post = BlogPost.query.get(post_id)
+    flash(f"show post {post_id}", category="success")
     return render_template("post.html", post=requested_post)
 
 @app.route("/edit/<int:post_id>")
