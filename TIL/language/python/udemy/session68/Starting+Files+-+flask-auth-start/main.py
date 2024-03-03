@@ -24,7 +24,7 @@ class User(UserMixin, db.Model):
 def home():
     return render_template("index.html")
 
-
+# 사용자 등록
 @app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -57,10 +57,10 @@ def secrets():
 def logout():
     pass
 
-
+# 파일 다운로드
 @app.route('/download')
 def download():
-    pass
+    return send_from_directory('static', filename="files/cheat_sheet.pdf")
 
 
 if __name__ == "__main__":
