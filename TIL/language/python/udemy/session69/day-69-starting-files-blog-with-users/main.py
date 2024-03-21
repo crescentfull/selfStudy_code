@@ -98,6 +98,7 @@ login_manager.init_app(app)
 def load_user(user_id):
     return User.query.get(user_id)
 
+
 @app.route('/login', methods=["GET","POST"])
 def login():
     form = LoginForm()
@@ -134,6 +135,14 @@ def show_post(post_id):
 
 
 # TODO: Use a decorator so only an admin user can create a new post
+def admin_only(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if current_user.id != 1:
+            return abort(403)
+        return f(*args, **kwargs)
+    return decorated_function
+
 @app.route("/new-post", methods=["GET", "POST"])
 def add_new_post():
     form = CreatePostForm()
