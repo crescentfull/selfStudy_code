@@ -33,7 +33,7 @@
         </a>
         <p class="post-meta">
           Posted by
-          {{post.author}}
+          {{post.author.name}}
           on {{post.date}}
           <!-- TODO: Only show delete button if user id is 1 (admin user) -->
           {% if current_user.id == 1 %}
