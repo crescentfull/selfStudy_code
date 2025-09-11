@@ -2,7 +2,7 @@
 import pytest
 from httpx import AsyncClient
 from asgi_lifespan import LifespanManager
-from app import app
+from apiTest import app
 
 @pytest.mark.anyio
 async def test_todo_crud_flow():

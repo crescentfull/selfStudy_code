@@ -5,8 +5,8 @@ from sqlalchemy import select, func
 from sqlmodel import Session
 from datetime import datetime
 
-from db import get_session
-from models import Todo, TodoCreate, TodoRead, TodoUpdate, TodoList
+from apiTest.db import get_session
+from apiTest.models import Todo, TodoCreate, TodoRead, TodoUpdate, TodoList
 
 router = APIRouter(prefix="/todos", tags=["todos"])
 
