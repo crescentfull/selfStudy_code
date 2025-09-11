@@ -3,6 +3,7 @@ import hashlib, json, uuid
 from typing import Optional, Literal, List
 
 from fastapi import FastAPI, HTTPException, Depends, Header, Request, status, Query
+from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field, field_validator
 from sqlalchemy import String, Integer, DateTime, Boolean, Text, UniqueConstraint, create_engine, select
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session, sessionmaker
@@ -122,7 +123,7 @@ def idem_get_or_set(db, key, method, path, body_dict, status_code=None, response
             path=path,
             body_hash=body_sha,
             status_code=status_code,
-            stored_response=json.dumps(response_obj, separators=(",", ":"), ensure_ascii=False),
+            stored_response=json.dumps(jsonable_encoder(response_obj), separators=(",", ":"), ensure_ascii=False),
         )
         db.add(rec)
         db.commit()
